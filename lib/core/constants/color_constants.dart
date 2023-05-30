@@ -1,4 +1,4 @@
-import '../app_core.dart';
+import 'package:statszone/core/app_core.dart';
 
 // App Color Constants
 const Color kWhite = Color(0xFFFFFFFF);

@@ -1,21 +1,20 @@
-import 'package:dio/dio.dart';
+export "package:flutter/material.dart";
+export "package:flutter/services.dart";
+export "package:flutter_svg/flutter_svg.dart";
+export 'package:google_fonts/google_fonts.dart';
+export 'package:shared_preferences/shared_preferences.dart';
 
-class ApiService {
-  static const _baseUrl = "https://api-football-v1.p.rapidapi.com/v3/";
-  static const _timeoutTwo = Duration(minutes: 2);
-  static const _timeoutThree = Duration(minutes: 3);
 
-  final Dio dio = Dio(BaseOptions(
-    baseUrl: _baseUrl,
-    sendTimeout: _timeoutThree,
-    receiveTimeout: _timeoutThree,
-    contentType: "application/json",
-    validateStatus: (int? s) => s! < 500
-  ));
 
-  Options defaultOptions = Options(
-      sendTimeout: _timeoutTwo, // 20 seconds
-      receiveTimeout: _timeoutTwo, // 20 seconds
-      contentType: 'application/json',
-      validateStatus: (int? s) => s! < 500);
-}
+export "config/extensions.dart";
+export "config/size_config.dart";
+export "config/app_prefs.dart";
+export "constants/color_constants.dart";
+export "constants/image_constants.dart";
+export "constants/enums.dart";
+export "constants/screen_constants.dart";
+export "config/themes/app_style.dart";
+export "config/themes/app_theme.dart";
+export "routes/router.dart";
+export "routes/app_routes.dart";
+export 'utils/locator.dart';

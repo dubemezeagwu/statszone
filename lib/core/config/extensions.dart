@@ -1,4 +1,4 @@
-import 'package:statszone/app/config/size_config.dart';
+import 'package:statszone/core/app_core.dart';
 
 extension SizeExtension on num {
   double get h => SizeConfig.getHeight(toDouble());

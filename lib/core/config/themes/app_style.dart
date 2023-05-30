@@ -1,4 +1,4 @@
-import '../../app_core.dart';
+import 'package:statszone/core/app_core.dart';
 
 class AppStyle {
   static const TextStyle title = TextStyle(

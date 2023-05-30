@@ -1,6 +1,4 @@
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../app_core.dart';
+import 'package:statszone/core/app_core.dart';
 
 class AppTheme {
   static ThemeData lightTheme (){

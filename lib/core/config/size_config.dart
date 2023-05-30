@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:statszone/core/app_core.dart';
 
 class SizeConfig {
   static BuildContext? appContext;
