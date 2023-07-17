@@ -1,24 +1,21 @@
 import 'package:statszone/core/app_core.dart';
 
-class ThemeNotifier extends ChangeNotifier {
-  bool _darkTheme = false;
-  bool get darkTheme => _darkTheme;
+  final themeNotifierProvider =
+  StateNotifierProvider<ThemeNotifier,bool>((ref) => ThemeNotifier());
 
-  ThemeNotifier (){
-    _darkTheme;
-  }
+  class ThemeNotifier extends StateNotifier<bool> {
+  ThemeNotifier() : super(false);
 
   void toggleTheme (){
-    _darkTheme = !darkTheme;
+    state = !state;
   }
 
-  loadFromPrefs() async {
-    _darkTheme = await AppPreferences.getThemePreferences();
-    notifyListeners();
+  loadFromPrefs () async {
+    state = await AppPreferences.getThemePreferences();
   }
 
-  saveToPrefs() async {
-    AppPreferences.setThemePreferences(darkTheme);
+  saveToPrefs () async {
+    AppPreferences.setThemePreferences(state);
   }
   }
 
