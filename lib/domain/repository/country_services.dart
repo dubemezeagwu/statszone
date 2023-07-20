@@ -7,6 +7,7 @@ class CountryServices extends ApiService {
 
   Future<NetworkResponse<List<Country>>> getAllCountries () async {
     final String url = "$baseUrl/countries";
+    logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(
         url,
@@ -23,6 +24,7 @@ class CountryServices extends ApiService {
             List<Country> list = [];
             res.data["response"].forEach((a) {
               list.add(Country.fromJson(a));
+              list = list.where((element) => countryCodes.any((code) => code == element.code)).toList();
             });
             return NetworkResponse(
                 message: "Successful",
@@ -31,24 +33,28 @@ class CountryServices extends ApiService {
           } catch (e){
             throw PARSING_ERROR;
           }
-          break;
         case NO_CONTENT:
           throw res.data["message"].toString();
-          break;
         case TIME_OUT:
           throw res.data["message"].toString();
-          break;
         case INTERNAL_SERVER_ERROR:
           throw res.data["message"].toString();
-          break;
         default:
           throw res.data['message'].first ?? 'Unknown Error';
       }
     } on DioError catch (e){
+      logger.e(e.toString());
       return NetworkResponse.handleException(e);
+
     }
     catch (e){
+      logger.e(e.toString());
       throw e.toString();
     }
   }
 }
+
+
+List<String> countryCodes = [
+  "BE","CA","BR","GB","FR","DE","NG","IT","NL","PT","SP","US","TR"
+];

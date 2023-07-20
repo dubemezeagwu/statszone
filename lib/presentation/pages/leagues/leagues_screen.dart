@@ -1,5 +1,3 @@
-import 'package:logger/logger.dart';
-import 'package:statszone/core/utils/theme_notifier.dart';
 import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/domain/view_models/country_view_model.dart';
 import 'package:statszone/presentation/app_presentation.dart';
