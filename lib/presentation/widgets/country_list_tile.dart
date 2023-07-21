@@ -19,7 +19,7 @@ class CountryListTile extends StatelessWidget {
           width: 25,
           child: SvgPicture.network(image!)),
       title: Text(title),
-      trailing: const Icon(Icons.arrow_drop_down_outlined),
+      // trailing: const Icon(Icons.arrow_drop_down_outlined),
     );
   }
 }
