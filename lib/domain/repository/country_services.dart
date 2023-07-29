@@ -1,6 +1,8 @@
 import 'package:logger/logger.dart';
 import 'package:statszone/domain/app_domain.dart';
 
+import '../models/league.dart';
+
 
 class CountryServices extends ApiService {
   Logger logger = Logger();
@@ -24,11 +26,16 @@ class CountryServices extends ApiService {
           try {
             List<Country> list = [];
             List<String> countryCodes = [
-              "BE","CA","BR","GB","FR","DE","NG","IT","NL","PT","ES","US","TR"
+              "AR","BE","CA","BR","EN","GB","FR","DE","NG","IT","HR","GH","NL","PT","ES","US","TR"
             ];
             res.data["response"].forEach((a) {
               list.add(Country.fromJson(a));
               list = list.where((element) => countryCodes.any((code) => code == element.code)).toList();
+              list.removeWhere(
+                      (element) => element.name == "Scotland"
+                          || element.name == "Northern-Ireland"
+                          || element.name == "Wales"
+              );
             });
             return NetworkResponse(
                 message: "Successful",
@@ -57,9 +64,10 @@ class CountryServices extends ApiService {
     }
   }
 
-
-  Future<NetworkResponse<List<Country>>> getLeaguesForCountries () async {
-    final String url = "$baseUrl/countries";
+  // Get all leagues for a particular country.
+  Future<NetworkResponse<List<League>>> getLeaguesForCountries
+      (String countryCode) async {
+    final String url = "$baseUrl/leagues?code=$countryCode";
     logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(
@@ -70,18 +78,15 @@ class CountryServices extends ApiService {
                 "x-rapidapi-host": baseUrl
               })
       );
-      logger.d(res.data);
+      // logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {
-            List<Country> list = [];
-            List<String> countryCodes = [
-              "BE","CA","BR","GB","FR","DE","NG","IT","NL","PT","ES","US","TR","ZA",
-            ];
+            List<League> list = [];
             res.data["response"].forEach((a) {
-              list.add(Country.fromJson(a));
-              list = list.where((element) => countryCodes.any((code) => code == element.code)).toList();
+              list.add(League.fromJson(a["league"]));
             });
+            logger.d("Log 1: ${list[2].toJson()}");
             return NetworkResponse(
                 message: "Successful",
                 status: true,

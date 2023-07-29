@@ -5,6 +5,7 @@ export 'package:statszone/core/app_core.dart';
 
 // Models
 export 'models/country.dart';
+export 'models/league.dart';
 export 'models/response/network_response.dart';
 
 // Repository

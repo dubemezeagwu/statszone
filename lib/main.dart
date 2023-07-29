@@ -7,8 +7,6 @@ import 'package:statszone/presentation/app_presentation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeLocator();
-  // final CountryServices service = CountryServices();
-  // await service.getAllCountries();
   await GlobalConfigs().get("assets/cfg/config.json");
   runApp(
     const ProviderScope(

@@ -9,28 +9,27 @@ final countryFutureProvider = FutureProvider.family(
         ref.watch(countryViewModelProvider).getAllCountries()
 );
 
+final leaguesFutureProvider = FutureProvider.family<List<League>, String>(
+        (ref, String countryCode) async =>
+        ref.watch(countryViewModelProvider).getLeaguesForCountry()
+);
+
 
 class LeaguesScreen extends ConsumerWidget {
   const LeaguesScreen({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final countryData = ref.watch(countryFutureProvider(ref));
+    final listOfCountries = countryData.value;
     return Container(
       child: countryData.when(
-          data: (data) => CountryExpansionWidget(data: data),
-          // data: (data) => ListView.builder(
-          //   padding: const EdgeInsets.only(top: 16,bottom: 16),
-          //   shrinkWrap: true,
-          //   itemCount: data.length,
-          //   itemBuilder: (BuildContext context, int index) {
-          //     return CountryListTile(
-          //         title: data[index].name!,
-          //         image: data[index].flag,
-          //     );
-          //   },),
+          data: (data) => CountryExpansionWidget(
+            countryData: data,),
           error: (e, _) => const Center(child: Text("No Data Found"),),
           loading: () => const Center(child: CircularProgressIndicator(),)),
     );
   }
+
 }
