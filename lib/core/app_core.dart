@@ -19,3 +19,5 @@ export "config/themes/app_theme.dart";
 export "routes/router.dart";
 export "routes/app_routes.dart";
 export 'utils/locator.dart';
+export 'utils/extensions.dart';
+export 'utils/theme_notifier.dart';

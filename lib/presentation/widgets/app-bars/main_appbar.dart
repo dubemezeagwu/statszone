@@ -18,6 +18,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       bottom: bottom,
+      elevation: 0,
       automaticallyImplyLeading: automaticallyImplyLeading,
       centerTitle: true,
       title: ConstrainedBox(
