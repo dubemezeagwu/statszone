@@ -1,31 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:statszone/domain/models/country.dart';
+import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/presentation/widgets/country_list_tile.dart';
 
-import '../../domain/models/league.dart';
+class CustomExpansionWidget extends StatefulWidget {
+  final List<TeamInfo> teamData;
 
-
-class CountryExpansionWidget extends StatefulWidget {
-  final List<Country> countryData;
-  final List<League>? leagueData;
-
-  const CountryExpansionWidget({
-    Key? key,
-    required this.countryData,
-    this.leagueData}) : super(key: key);
+  const CustomExpansionWidget(
+      {Key? key, required this.teamData,})
+      : super(key: key);
 
   @override
-  State<CountryExpansionWidget> createState() => _CountryExpansionWidgetState();
+  State<CustomExpansionWidget> createState() => _CustomExpansionWidgetState();
 }
 
-class _CountryExpansionWidgetState extends State<CountryExpansionWidget> {
+class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
   List<Item> _data = <Item>[];
 
   @override
   void initState() {
-    _data = generateItems(items: widget.countryData);
+    _data = generateItems(items: widget.teamData);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -35,7 +30,7 @@ class _CountryExpansionWidgetState extends State<CountryExpansionWidget> {
     );
   }
 
-  Widget _buildExpansionPanel (List<Item> data){
+  Widget _buildExpansionPanel(List<Item> data) {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpand) {
         setState(() {
@@ -44,24 +39,28 @@ class _CountryExpansionWidgetState extends State<CountryExpansionWidget> {
       },
       children: data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(
-            headerBuilder: (BuildContext context, bool isExpanded,){
+            headerBuilder: (
+              BuildContext context,
+              bool isExpanded,
+            ) {
               return CountryListTile(
-                  title: item.headerValue.name!,
-                  image: item.headerValue.flag!,
+                title: item.headerValue.team.name!,
+                image: item.headerValue.team.logo!,
               );
             },
-            body: ListTile(title: Text(item.expandedValue),),
-          isExpanded: item.isExpanded
-        );
+            body: ListTile(
+              title: Text(item.expandedValue),
+            ),
+            isExpanded: item.isExpanded);
       }).toList(),
     );
   }
 
-  List<Item> generateItems ({required List<Country> items}){
-    return List<Item>.generate(items.length, (index) => Item(
-        expandedValue: "No content",
-        headerValue: items[index])
-    );
+  List<Item> generateItems({required List<TeamInfo> items}) {
+    return List<Item>.generate(
+        items.length,
+        (index) =>
+            Item(expandedValue: "No content", headerValue: items[index]));
   }
 }
 
@@ -74,6 +73,6 @@ class Item {
   });
 
   String expandedValue;
-  Country headerValue;
+  TeamInfo headerValue;
   bool isExpanded;
 }

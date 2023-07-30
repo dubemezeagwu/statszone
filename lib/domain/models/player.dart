@@ -45,7 +45,7 @@ class Player {
     "firstName": firstName,
     "lastName": lastName,
     "age": age,
-    "birth": dateOfBirth,
+    "birth": dateOfBirth?.toJson(),
     "nationality": nationality,
     "height": height,
     "weight": weight,

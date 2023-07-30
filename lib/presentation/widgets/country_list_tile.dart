@@ -15,9 +15,12 @@ class CountryListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: SizedBox(
-          height: 25,
-          width: 25,
-          child: SvgPicture.network(image!)),
+          height: 35,
+          width: 35,
+          child: CachedNetworkImage(
+            imageUrl: image!,
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+            )),
       title: Text(title),
       // trailing: const Icon(Icons.arrow_drop_down_outlined),
     );

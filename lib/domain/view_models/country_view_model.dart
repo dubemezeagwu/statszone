@@ -1,6 +1,5 @@
 import 'package:logger/logger.dart';
 import 'package:statszone/domain/app_domain.dart';
-import 'package:statszone/domain/repository/country_services.dart';
 
 
 final countryViewModelProvider = Provider((ref) => CountryViewModel());
@@ -12,7 +11,7 @@ class CountryViewModel {
   String errorMessage = "";
   final logger = Logger();
 
-  Future<List<Country>> getAllCountries () async {
+  Future <List<Country>> getAllCountries () async {
     try {
       final response = await _countryServices.getAllCountries();
       if (response.status == true) {
