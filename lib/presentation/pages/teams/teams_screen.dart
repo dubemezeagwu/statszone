@@ -13,8 +13,8 @@ final leaguesFutureProvider = FutureProvider.family<List<League>, String>(
 final teamsFutureProvider = FutureProvider.family((ref, WidgetRef _ref) async =>
     ref.watch(teamViewModelProvider).getAllTeams());
 
-class LeaguesScreen extends ConsumerWidget {
-  const LeaguesScreen({Key? key}) : super(key: key);
+class TeamsScreen extends ConsumerWidget {
+  const TeamsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

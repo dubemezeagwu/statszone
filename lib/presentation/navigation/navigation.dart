@@ -5,7 +5,7 @@ class NavigationWidget extends StatefulWidget {
 
   const NavigationWidget({
     Key? key,
-    }) : super(key: key);
+  }) : super(key: key);
 
   @override
   State<NavigationWidget> createState() => _NavigationWidgetState();
@@ -14,8 +14,7 @@ class NavigationWidget extends StatefulWidget {
 class _NavigationWidgetState extends State<NavigationWidget> {
   int _selectedTab = 0;
 
-
-  void onSelected (int index){
+  void onSelected(int index) {
     setState(() {
       _selectedTab = index;
     });
@@ -28,10 +27,10 @@ class _NavigationWidgetState extends State<NavigationWidget> {
   }
 
   static const List<Widget> bottomNavigationScreens = [
-    LeaguesScreen(),
-    CompareScreen(),
+    TeamsScreen(),
+    PlayersScreen(),
     FavouritesScreen(),
-    MoreScreen()
+    StatsScreen()
   ];
 
   @override
@@ -55,7 +54,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
           onTap: onSelected,
           items: List.generate(
             bottomBarItems.length,
-                (index) => BottomNavigationBarItem(
+            (index) => BottomNavigationBarItem(
               icon: Icon(
                 _selectedTab == index
                     ? bottomBarItems[index].selectedIcon
@@ -75,27 +74,25 @@ class BottomBarContent {
 
   const BottomBarContent(
       {required this.selectedIcon,
-        required this.unselectedIcon,
-        required this.label});
+      required this.unselectedIcon,
+      required this.label});
 
   static const List<BottomBarContent> bottomBarList = [
     BottomBarContent(
-        selectedIcon: Icons.home,
-        unselectedIcon: Icons.home_outlined,
-        label: "Leagues"),
+        selectedIcon: Icons.list,
+        unselectedIcon: Icons.list_outlined,
+        label: "Teams"),
     BottomBarContent(
-        selectedIcon: Icons.compare_arrows,
-        unselectedIcon: Icons.compare_arrows_outlined,
-        label: "Compare"),
+        selectedIcon: Icons.person,
+        unselectedIcon: Icons.person_outline_outlined,
+        label: "Players"),
+    BottomBarContent(
+        selectedIcon: Icons.stacked_bar_chart,
+        unselectedIcon: Icons.stacked_bar_chart_outlined,
+        label: "Stats"),
     BottomBarContent(
         selectedIcon: Icons.bookmark_border_rounded,
         unselectedIcon: Icons.bookmark_border_outlined,
         label: "Favourites"),
-    BottomBarContent(
-        selectedIcon: Icons.settings,
-        unselectedIcon: Icons.settings_outlined,
-        label: "More"),
   ];
-
-
 }

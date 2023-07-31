@@ -12,6 +12,18 @@ export 'models/suggestion.dart';
 export 'models/team.dart';
 export 'models/venue.dart';
 export 'models/team_info.dart';
+export 'models/player-stats/player_stats.dart';
+export 'models/player-stats/booking.dart';
+export 'models/player-stats/dribble.dart';
+export 'models/player-stats/duel.dart';
+export 'models/player-stats/foul.dart';
+export 'models/player-stats/game.dart';
+export 'models/player-stats/goal.dart';
+export 'models/player-stats/pass.dart';
+export 'models/player-stats/penalty.dart';
+export 'models/player-stats/shot.dart';
+export 'models/player-stats/substitution.dart';
+export 'models/player-stats/tackle.dart';
 
 // Repository
 export "repository/api_service.dart";

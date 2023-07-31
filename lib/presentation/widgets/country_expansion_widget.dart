@@ -4,9 +4,10 @@ import 'package:statszone/presentation/widgets/country_list_tile.dart';
 class CustomExpansionWidget extends StatefulWidget {
   final List<TeamInfo> teamData;
 
-  const CustomExpansionWidget(
-      {Key? key, required this.teamData,})
-      : super(key: key);
+  const CustomExpansionWidget({
+    Key? key,
+    required this.teamData,
+  }) : super(key: key);
 
   @override
   State<CustomExpansionWidget> createState() => _CustomExpansionWidgetState();
@@ -48,8 +49,14 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
                 image: item.headerValue.team.logo!,
               );
             },
-            body: ListTile(
-              title: Text(item.expandedValue),
+            body: Column(
+              children: item.expandedValue.map(
+                (e) => ListTile(
+                  leading: e.icon,
+                  title: Text(e.title),
+                  dense: true,
+                  iconColor: kBlack,
+                )).toList(),
             ),
             isExpanded: item.isExpanded);
       }).toList(),
@@ -59,8 +66,9 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
   List<Item> generateItems({required List<TeamInfo> items}) {
     return List<Item>.generate(
         items.length,
-        (index) =>
-            Item(expandedValue: "No content", headerValue: items[index]));
+        (index) => Item(
+          expandedValue: categories, 
+          headerValue: items[index]));
   }
 }
 
@@ -72,7 +80,20 @@ class Item {
     this.isExpanded = false,
   });
 
-  String expandedValue;
+  List<Category> expandedValue;
   TeamInfo headerValue;
   bool isExpanded;
 }
+
+class Category {
+  final String title;
+  final Icon icon;
+
+  Category(this.title, this.icon);
+}
+
+final List<Category> categories = [
+  Category("Team Information", const Icon(Icons.info)),
+  Category("Form", const Icon(Icons.stacked_line_chart)),
+  Category("Squad", const Icon(Icons.stadium))
+];
