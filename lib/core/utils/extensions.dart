@@ -96,6 +96,22 @@ extension WidgetExtension on Widget {
     );
   }
 
+  /// add scaling to parent widget
+  Widget scale({
+    required double scale,
+    Offset? origin,
+    AlignmentGeometry? alignment,
+    bool transformHitTests = true,
+  }) {
+    return Transform.scale(
+      scale: scale,
+      origin: origin,
+      alignment: alignment,
+      transformHitTests: transformHitTests,
+      child: this,
+    );
+  }
+
   /// add Expanded to parent widget
   Widget expand({flex = 1}) => Expanded(flex: flex, child: this!);
 

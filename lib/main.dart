@@ -1,6 +1,6 @@
 import 'package:global_configs/global_configs.dart';
-import 'package:statszone/core/utils/theme_notifier.dart';
 import 'package:statszone/presentation/app_presentation.dart';
+import 'package:statszone/presentation/navigation/navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

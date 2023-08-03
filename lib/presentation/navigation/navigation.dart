@@ -1,4 +1,7 @@
 import 'package:statszone/presentation/app_presentation.dart';
+import 'package:flutter/cupertino.dart';
+
+
 
 class NavigationWidget extends StatefulWidget {
   // final int loadedTab;
@@ -36,34 +39,60 @@ class _NavigationWidgetState extends State<NavigationWidget> {
   @override
   Widget build(BuildContext context) {
     const bottomBarItems = BottomBarContent.bottomBarList;
-    return Scaffold(
-      appBar: MainAppBar(
-        title: 'STATS ZONE',
-        automaticallyImplyLeading: true,
-      ),
-      body: bottomNavigationScreens[_selectedTab],
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Theme.of(context).colorScheme.primary,
-          iconSize: 20,
-          elevation: 0,
-          backgroundColor: kPrimary10,
-          selectedIconTheme: const IconThemeData(size: 28),
-          unselectedItemColor: kBlack2,
-          currentIndex: _selectedTab,
-          onTap: onSelected,
-          items: List.generate(
-            bottomBarItems.length,
-            (index) => BottomNavigationBarItem(
-              icon: Icon(
-                _selectedTab == index
-                    ? bottomBarItems[index].selectedIcon
-                    : bottomBarItems[index].unselectedIcon,
+    return Consumer(builder: ((context, ref, child) {
+      final theme = ref.watch(themeNotifierProvider);
+      final toggle = ref.read(themeNotifierProvider.notifier);
+      return Scaffold(
+        appBar: MainAppBar(
+          title: 'STATS ZONE',
+          automaticallyImplyLeading: true,
+          actions: [
+            Container(
+              margin: const EdgeInsets.only(right: 16),
+              child: Row(
+                children: [
+                  InkWell(
+                    child: theme
+                        ? const Icon(Icons.mode_night)
+                        : const Icon (Icons.sunny),
+                  ).paddingRight(4),
+                  CupertinoSwitch(
+                    key: const Key("themeSwitch"),
+                    value: theme,
+                    // activeColor: kDarkGrey,
+                    activeColor: theme ? kGrey800 : kGrey,
+                    onChanged: (bool value) {
+                      toggle.toggleTheme();
+                    },
+                  ).scale(scale: 0.8, alignment: const Alignment(0.0, 0.0)),
+                ],
               ),
-              label: bottomBarItems[index].label,
-            ),
-          )),
-    );
+            )
+          ],
+        ),
+        body: bottomNavigationScreens[_selectedTab],
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            iconSize: 20,
+            elevation: 0,
+            backgroundColor: kPrimary10,
+            selectedIconTheme: const IconThemeData(size: 28),
+            currentIndex: _selectedTab,
+            onTap: onSelected,
+            items: List.generate(
+              bottomBarItems.length,
+              (index) => BottomNavigationBarItem(
+                icon: Icon(
+                  _selectedTab == index
+                      ? bottomBarItems[index].selectedIcon
+                      : bottomBarItems[index].unselectedIcon,
+                ),
+                label: bottomBarItems[index].label,
+              ),
+            )),
+      );
+    }));
   }
 }
 

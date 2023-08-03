@@ -3,7 +3,7 @@ import 'package:statszone/core/app_core.dart';
 class AppTheme {
   static ThemeData lightTheme (){
     final ThemeData base = ThemeData.light();
-    final fontFamily = GoogleFonts.montserrat().fontFamily;
+    final fontFamily = GoogleFonts.raleway().fontFamily;
     const Color primaryColor = kGrey252;
     const Color secondaryColor = kBlack;
     final ColorScheme colorScheme = const ColorScheme.light().copyWith(
@@ -19,12 +19,24 @@ class AppTheme {
       backgroundColor: primaryColor,
       canvasColor: primaryColor,
       scaffoldBackgroundColor: primaryColor,
+      textTheme: _textTheme(base.textTheme, secondaryColor),
+      appBarTheme: AppBarTheme(
+        elevation: 0,
+        color: primaryColor,
+        iconTheme: const IconThemeData(color: secondaryColor),
+        titleTextStyle: AppStyle.subtitle.copyWith(
+          fontFamily: fontFamily,
+          color: secondaryColor,
+          fontSize: 15,
+          fontWeight: FontWeight.w600
+        )
+      )
     );
   }
 
   static ThemeData darkTheme() {
     final ThemeData base = ThemeData.dark();
-    final fontFamily = GoogleFonts.workSans().fontFamily;
+    final fontFamily = GoogleFonts.raleway().fontFamily;
     const Color primaryColor = kDarkGrey;
     const Color secondaryColor = kWhite;
     final ColorScheme colorScheme = const ColorScheme.dark().copyWith(
