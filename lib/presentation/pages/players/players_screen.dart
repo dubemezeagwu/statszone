@@ -14,7 +14,6 @@ class PlayersScreen extends StatelessWidget {
             Icons.search_outlined,
             size: 25,
           ),
-          fillColor: Colors.white,
           isSearch: true,
           hintText: "Search Players",
         ).paddingAll(20.0),

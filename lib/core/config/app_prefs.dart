@@ -5,7 +5,7 @@ class AppPreferences {
 
   static void setThemePreferences (bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(themeSettings,true);
+    prefs.setBool(themeSettings,value);
   }
 
   static Future<bool> getThemePreferences () async {

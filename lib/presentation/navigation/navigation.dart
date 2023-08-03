@@ -44,7 +44,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
       final toggle = ref.read(themeNotifierProvider.notifier);
       return Scaffold(
         appBar: MainAppBar(
-          title: 'STATS ZONE',
+          title: AppStrings.appTitle,
           automaticallyImplyLeading: true,
           actions: [
             Container(
@@ -110,18 +110,18 @@ class BottomBarContent {
     BottomBarContent(
         selectedIcon: Icons.list,
         unselectedIcon: Icons.list_outlined,
-        label: "Teams"),
+        label: AppStrings.teams),
     BottomBarContent(
         selectedIcon: Icons.person,
         unselectedIcon: Icons.person_outline_outlined,
-        label: "Players"),
+        label: AppStrings.players),
     BottomBarContent(
         selectedIcon: Icons.stacked_bar_chart,
         unselectedIcon: Icons.stacked_bar_chart_outlined,
-        label: "Stats"),
+        label: AppStrings.stats),
     BottomBarContent(
         selectedIcon: Icons.bookmark_border_rounded,
         unselectedIcon: Icons.bookmark_border_outlined,
-        label: "Favourites"),
+        label: AppStrings.favourites),
   ];
 }

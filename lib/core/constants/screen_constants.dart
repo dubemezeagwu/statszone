@@ -17,3 +17,11 @@ const String PASSWORD_DOES_NOT_MATCH = 'Passwords do not match';
 const String NEEDS_PASSWORD_CHANGE = 'needs_pwd_change';
 const String CREDENTIALS_ARE_WRONG =
     'These credentials are wrong \nCheck and try again';
+
+class AppStrings {
+  static const String appTitle = "STATS ZONE";
+  static const String teams = "Teams";
+  static const String players = "Players";
+  static const String stats = "Stats";
+  static const String favourites = "Favourites";
+}

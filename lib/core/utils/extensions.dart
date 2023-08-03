@@ -6,7 +6,7 @@ extension StringExtension on String {
   bool get hasNumber => contains(RegExp(r'[0-9]'));
 }
 
-extension WidgetExtension on Widget {
+extension WidgetExtension on Widget? {
   SizedBox withSize({double width = 0.0, double height = 0.0}) {
     return SizedBox(
       width: width,

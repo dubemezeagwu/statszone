@@ -62,7 +62,7 @@ class AppTheme {
   }
 
   static TextTheme _textTheme(TextTheme base, Color color) {
-    final fontFamily = GoogleFonts.montserrat().fontFamily;
+    final fontFamily = GoogleFonts.raleway().fontFamily;
     return base.copyWith(
       headline1: AppStyle.title.copyWith(fontFamily: fontFamily, color: color,),
       headline2:
