@@ -13,11 +13,23 @@ final leaguesFutureProvider = FutureProvider.family<List<League>, String>(
 final teamsFutureProvider = FutureProvider.family((ref, WidgetRef _ref) async =>
     ref.watch(teamViewModelProvider).getAllTeams());
 
-class TeamsScreen extends ConsumerWidget {
-  const TeamsScreen({Key? key}) : super(key: key);
+class TeamsScreen extends ConsumerStatefulWidget {
+  const TeamsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<TeamsScreen> createState() => _TeamsScreenState();
+}
+
+class _TeamsScreenState extends ConsumerState<TeamsScreen> {
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(builder: ((context, ref, child) {
     final countryData = ref.watch(teamsFutureProvider(ref));
     return Container(
       child: countryData.when(
@@ -31,5 +43,6 @@ class TeamsScreen extends ConsumerWidget {
                 child: CircularProgressIndicator(),
               )),
     );
+    }));
   }
 }

@@ -1,10 +1,7 @@
 import 'package:statszone/presentation/app_presentation.dart';
 import 'package:flutter/cupertino.dart';
 
-
-
 class NavigationWidget extends StatefulWidget {
-  // final int loadedTab;
 
   const NavigationWidget({
     Key? key,
@@ -70,7 +67,10 @@ class _NavigationWidgetState extends State<NavigationWidget> {
             )
           ],
         ),
-        body: bottomNavigationScreens[_selectedTab],
+        body: IndexedStack(
+          index: _selectedTab,
+          children: bottomNavigationScreens,
+        ),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Theme.of(context).colorScheme.primary,
