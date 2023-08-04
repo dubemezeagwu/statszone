@@ -30,7 +30,13 @@ class AppTheme {
           fontSize: 15,
           fontWeight: FontWeight.w600
         )
-      )
+      ),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      useMaterial3: true,
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+          for (final platform in TargetPlatform.values)
+            platform: const OpenUpwardsPageTransitionsBuilder()
+        }),
     );
   }
 
@@ -58,6 +64,12 @@ class AppTheme {
         titleTextStyle: AppStyle.subtitle
             .copyWith(fontFamily: fontFamily, color: secondaryColor, fontSize: 15, fontWeight: FontWeight.w600),
       ),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      useMaterial3: true,
+      pageTransitionsTheme: PageTransitionsTheme(builders: {
+          for (final platform in TargetPlatform.values)
+            platform: const OpenUpwardsPageTransitionsBuilder()
+        }),
     );
   }
 
