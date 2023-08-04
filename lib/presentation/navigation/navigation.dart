@@ -29,8 +29,8 @@ class _NavigationWidgetState extends State<NavigationWidget> {
   static const List<Widget> bottomNavigationScreens = [
     TeamsScreen(),
     PlayersScreen(),
+    StatsScreen(),
     FavouritesScreen(),
-    StatsScreen()
   ];
 
   @override

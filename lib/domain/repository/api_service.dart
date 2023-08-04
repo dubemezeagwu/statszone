@@ -2,8 +2,8 @@ import '../app_domain.dart';
 
 class ApiService {
 
-  String baseUrl = "https://v3.football.api-sports.io";
-  String apiKey = "7023d9d786704622f2483912f186a10b";
+  String baseUrl = GlobalConfigs().get("base_url");
+  String apiKey = GlobalConfigs().get("api_key");
   static const _timeoutTwo = Duration(minutes: 2);
   static const _timeoutThree = Duration(minutes: 3);
 

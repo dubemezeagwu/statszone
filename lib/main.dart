@@ -5,7 +5,7 @@ import 'package:statszone/presentation/navigation/navigation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeLocator();
-  await GlobalConfigs().get("assets/cfg/config.json");
+  await GlobalConfigs().loadJsonFromdir('assets/cfg/config.json');
   runApp(
     const ProviderScope(
         child: MyApp()
