@@ -1,8 +1,8 @@
 import 'package:statszone/domain/app_domain.dart';
 
 class TeamInfo {
-  final Team team;
-  final Venue venue;
+  final Team? team;
+  final Venue? venue;
 
   TeamInfo({required this.team, required this.venue});
 
@@ -14,7 +14,7 @@ class TeamInfo {
   }
 
   Map<String, dynamic> toJson() => {
-    "team": team.toJson(),
-    "venue": venue.toJson()
+    "team": team?.toJson(),
+    "venue": venue?.toJson()
   };
 }

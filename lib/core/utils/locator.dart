@@ -6,4 +6,5 @@ GetIt locator = GetIt.instance;
 void initializeLocator() {
   locator.registerLazySingleton(() => CountryServices());
   locator.registerLazySingleton(() => TeamServices());
+  locator.registerLazySingleton(() => PlayerServices());
 }

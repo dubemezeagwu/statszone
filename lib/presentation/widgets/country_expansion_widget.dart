@@ -45,8 +45,8 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
               bool isExpanded,
             ) {
               return CountryListTile(
-                title: item.headerValue.team.name!,
-                image: item.headerValue.team.logo!,
+                title: item.headerValue.team!.name!,
+                image: item.headerValue.team!.logo!,
               );
             },
             body: Column(

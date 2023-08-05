@@ -1,6 +1,7 @@
 import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/domain/view_models/team_view_model.dart';
 import 'package:statszone/presentation/widgets/country_expansion_widget.dart';
+import 'package:statszone/presentation/widgets/customized_loader.dart';
 
 final countryFutureProvider = FutureProvider.family(
     (ref, WidgetRef _ref) async =>
@@ -22,11 +23,7 @@ class TeamsScreen extends ConsumerStatefulWidget {
 
 class _TeamsScreenState extends ConsumerState<TeamsScreen> {
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
+  
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: ((context, ref, child) {
@@ -40,7 +37,7 @@ class _TeamsScreenState extends ConsumerState<TeamsScreen> {
                 child: Text("No Data Found"),
               ),
           loading: () => const Center(
-                child: CircularProgressIndicator(),
+                child: CustomizedLoader(),
               )),
     );
     }));
