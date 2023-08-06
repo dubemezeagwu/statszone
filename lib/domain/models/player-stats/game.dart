@@ -4,7 +4,7 @@ class Game {
     final int? minutes;
     final dynamic number;
     final String position;
-    final double? rating;
+    final String? rating;
     final bool captain;
 
     Game({
@@ -23,7 +23,7 @@ class Game {
         minutes: json["minutes"] as int?,
         number: json["number"],
         position: json["position"] as String,
-        rating: json["rating"] as double?,
+        rating: json["rating"] as String?,
         captain: json["captain"] as bool,
     );
 

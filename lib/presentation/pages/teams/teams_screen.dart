@@ -1,6 +1,5 @@
 import 'package:statszone/domain/app_domain.dart';
-import 'package:statszone/domain/view_models/team_view_model.dart';
-import 'package:statszone/presentation/widgets/country_expansion_widget.dart';
+import 'package:statszone/presentation/widgets/custom_expansion_widget.dart';
 import 'package:statszone/presentation/widgets/customized_loader.dart';
 
 final countryFutureProvider = FutureProvider.family(

@@ -12,8 +12,8 @@ class PlayerInfo {
 
   factory PlayerInfo.fromJson (Map<String, dynamic> json){
     return PlayerInfo(
-      player: json["player"] as Player?,
-      playerStats : json["statistics"] as PlayerStats?
+      player: Player.fromJson(json["player"]),
+      playerStats : PlayerStats.fromJson(json["statistics"][0])
     );
   }
 

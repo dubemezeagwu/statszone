@@ -6,11 +6,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeLocator();
   await GlobalConfigs().loadJsonFromdir('assets/cfg/config.json');
-  runApp(
-    const ProviderScope(
-        child: MyApp()
-    )
-  );
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -20,13 +16,19 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool themeStatus = ref.watch(themeNotifierProvider);
-    return MaterialApp(
-        title: 'Stats Zone',
-        theme: themeStatus
-            ? AppTheme.darkTheme()
-            : AppTheme.lightTheme(),
-        debugShowCheckedModeBanner: false,
-        home: const NavigationWidget()
+    return GestureDetector(
+      onTap: () {
+        // FocusScopeNode currentFocus = FocusScope.of(context);
+        // if (!currentFocus.hasPrimaryFocus) {
+        //   currentFocus.unfocus();
+        // }
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: MaterialApp(
+          title: 'Stats Zone',
+          theme: themeStatus ? AppTheme.darkTheme() : AppTheme.lightTheme(),
+          debugShowCheckedModeBanner: false,
+          home: const NavigationWidget()),
     );
   }
 }

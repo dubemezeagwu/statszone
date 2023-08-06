@@ -27,15 +27,15 @@ class Player {
     return Player(
       id: json["id"] as int?,
       name: json["name"] as String?,
-      firstName: json["firstName"] as String?,
-      lastName: json["lastName"] as String?,
+      firstName: json["firstname"] as String?,
+      lastName: json["lastname"] as String?,
       age: json["age"] as int?,
-      dateOfBirth: json["birth"] as _DateOfBirth?,
+      dateOfBirth: _DateOfBirth.fromJson(json["birth"]),
       nationality: json["nationality"] as String?,
       height: json["height"] as String?,
       weight: json["weight"] as String?,
       injured: json["injured"] as bool?,
-      image: json["image"] as String?,
+      image: json["photo"] as String?,
     );
   }
 

@@ -1,14 +1,16 @@
 import 'package:logger/logger.dart';
 import 'package:statszone/domain/app_domain.dart';
+import 'dart:convert' as json;
 
-class PlayerServices extends ApiService{
+class PlayerServices extends ApiService {
   Logger logger = Logger();
   static String leagueId = "39";
   static String currentSeason = "2022";
 
-  Future<NetworkResponse<List<PlayerInfo>>> searchForPlayer(String playerName) async {
-    final String url = 
-    "$baseUrl/teams?season=$currentSeason&search=$playerName&league=$leagueId";
+  Future<NetworkResponse<List<PlayerInfo>>> searchForPlayer(
+      String playerName) async {
+    final String url =
+        "$baseUrl/players?season=$currentSeason&search=$playerName&league=$leagueId";
     logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(url,
@@ -46,5 +48,4 @@ class PlayerServices extends ApiService{
       throw e.toString();
     }
   }
-  
 }
