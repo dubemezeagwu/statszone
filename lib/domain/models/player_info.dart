@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:statszone/domain/models/player-stats/player_stats.dart';
 import 'package:statszone/domain/models/player.dart';
 
-class PlayerInfo {
+class PlayerInfo extends Equatable{
   final Player? player;
   final PlayerStats? playerStats;
 
-  PlayerInfo({
+  const PlayerInfo({
     this.player,
     this.playerStats
   });
@@ -21,4 +22,7 @@ class PlayerInfo {
     "player": player,
     "statistics" : playerStats
   };
+  
+  @override
+  List<Object?> get props => [player,playerStats];
 }

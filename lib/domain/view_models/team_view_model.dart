@@ -3,6 +3,9 @@ import 'package:statszone/domain/app_domain.dart';
 
 final teamViewModelProvider = Provider((ref) => TeamViewModel());
 
+final teamsFutureProvider = FutureProvider((ref) async =>
+    ref.watch(teamViewModelProvider).getAllTeams());
+
 class TeamViewModel {
   final TeamServices _teamServices = locator<TeamServices>();
   List<TeamInfo> allTeams = [];

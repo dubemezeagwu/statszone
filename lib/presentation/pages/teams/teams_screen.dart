@@ -10,8 +10,7 @@ final leaguesFutureProvider = FutureProvider.family<List<League>, String>(
     (ref, String countryCode) async =>
         ref.watch(countryViewModelProvider).getLeaguesForCountry());
 
-final teamsFutureProvider = FutureProvider.family((ref, WidgetRef _ref) async =>
-    ref.watch(teamViewModelProvider).getAllTeams());
+
 
 class TeamsScreen extends ConsumerStatefulWidget {
   const TeamsScreen({super.key});
@@ -26,7 +25,7 @@ class _TeamsScreenState extends ConsumerState<TeamsScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: ((context, ref, child) {
-    final countryData = ref.watch(teamsFutureProvider(ref));
+    final countryData = ref.watch(teamsFutureProvider);
     return Container(
       child: countryData.when(
           data: (data) => CustomExpansionWidget(

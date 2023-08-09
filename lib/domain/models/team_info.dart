@@ -1,10 +1,10 @@
 import 'package:statszone/domain/app_domain.dart';
 
-class TeamInfo {
+class TeamInfo extends Equatable{
   final Team? team;
   final Venue? venue;
 
-  TeamInfo({required this.team, required this.venue});
+  const TeamInfo({required this.team, required this.venue});
 
   factory TeamInfo.fromJson(Map<String, dynamic> json) {
     return TeamInfo(
@@ -17,4 +17,7 @@ class TeamInfo {
     "team": team?.toJson(),
     "venue": venue?.toJson()
   };
+  
+  @override
+  List<Object?> get props => [team,venue];
 }

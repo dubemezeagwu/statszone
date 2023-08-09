@@ -28,7 +28,6 @@ class _PlayersScreenState extends State<PlayersScreen> {
   Widget build(BuildContext context) {
     return SafeArea(child: Consumer(builder: ((context, ref, child) {
       final playerData = ref.watch(playerViewModelProvider);
-      print("Data: ${playerData.toString()}");
       return Column(
         children: [
           AppTextField(

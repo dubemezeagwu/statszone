@@ -22,7 +22,7 @@ class PlayerSearchWidget extends StatelessWidget {
     return ShadowCard(
       contentPadding: 0,
       child: ListTile(
-        visualDensity:VisualDensity(horizontal: 0, vertical: -2),
+        visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
         leading: SizedBox(
             height: 35,
             width: 35,
