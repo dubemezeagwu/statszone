@@ -2,6 +2,7 @@ export "package:flutter/material.dart";
 export "package:flutter/services.dart";
 export "package:flutter_svg/flutter_svg.dart";
 export 'package:google_fonts/google_fonts.dart';
+export 'package:flex_color_scheme/flex_color_scheme.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 

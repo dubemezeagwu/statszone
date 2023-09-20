@@ -42,7 +42,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
       return Scaffold(
         appBar: MainAppBar(
           title: AppStrings.appTitle,
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
           actions: [
             Container(
               margin: const EdgeInsets.only(right: 16),
@@ -76,8 +76,6 @@ class _NavigationWidgetState extends State<NavigationWidget> {
             selectedItemColor: Theme.of(context).colorScheme.primary,
             iconSize: 20,
             elevation: 0,
-            backgroundColor: kPrimary10,
-            selectedIconTheme: const IconThemeData(size: 28),
             currentIndex: _selectedTab,
             onTap: onSelected,
             items: List.generate(

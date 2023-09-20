@@ -1,3 +1,6 @@
+import 'package:statszone/presentation/navigation/navigation.dart';
+import 'package:statszone/presentation/pages/player_detailed_screen.dart';
+
 import '../app_core.dart';
 
 class AppNavigator {
@@ -23,13 +26,18 @@ class AppNavigator {
       Navigator.of(context).pop();
 
   // ROUTE GENERATOR
-  static Route<dynamic> generateRoute({required RouteSettings settings}){
+  static Route<dynamic> generateRoute(RouteSettings settings){
     switch(settings.name) {
-      // case AppRoutes.home:
-      //   return _getPageRoute(
-      //     routeName: settings.name,
-      //     view:
-      //   );
+      case AppRoutes.playerDetails:
+        return _getPageRoute(
+          routeName: settings.name,
+          view: const PlayerDetailedScreen()
+        );
+      case AppRoutes.navigation:
+        return _getPageRoute(
+          routeName: settings.name,
+          view: const NavigationWidget()
+        );  
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

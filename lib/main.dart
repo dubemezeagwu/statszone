@@ -28,7 +28,9 @@ class MyApp extends ConsumerWidget {
           title: 'Stats Zone',
           theme: themeStatus ? AppTheme.darkTheme() : AppTheme.lightTheme(),
           debugShowCheckedModeBanner: false,
-          home: const NavigationWidget()),
+          initialRoute: AppRoutes.navigation,
+          onGenerateRoute: AppNavigator.generateRoute,
+          ),
     );
   }
 }

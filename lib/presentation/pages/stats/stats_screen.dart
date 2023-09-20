@@ -17,27 +17,35 @@ class StatsScreen extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(children: [
-          Wrap(
-            spacing: 55,
-            children: [
-              StatsPreviewWidget(
-                image: topGoals.value![0].player?.image, 
-                statsTitle: "Goals", 
-                statsNumber: topGoals.value![0].playerStats?.goal?.total.toString()),
-                StatsPreviewWidget(
-                image: topAssists.value![0].player?.image, 
-                statsTitle: "Assists", 
-                statsNumber: topAssists.value![0].playerStats?.goal?.assists.toString()),
-                StatsPreviewWidget(
-                image: topYellowCards.value![0].player?.image, 
-                statsTitle: "Yellow Cards", 
-                statsNumber: topYellowCards.value![0].playerStats?.card?.yellow.toString()),
-                StatsPreviewWidget(
-                image: topRedCards.value![0].player?.image, 
-                statsTitle: "Red Cards", 
-                statsNumber: topRedCards.value![0].playerStats?.card?.red.toString())
-            ]
-          )
+          Wrap(spacing: 55, children: [
+            GestureDetector(
+              onTap: () {
+                AppNavigator.navigateToPage(
+                    routeName: AppRoutes.playerDetails, 
+                    context: context);
+              },
+              child: StatsPreviewWidget(
+                  image: topGoals.value![0].player?.image,
+                  statsTitle: "Goals",
+                  statsNumber:
+                      topGoals.value![0].playerStats?.goal?.total.toString()),
+            ),
+            StatsPreviewWidget(
+                image: topAssists.value![0].player?.image,
+                statsTitle: "Assists",
+                statsNumber:
+                    topAssists.value![0].playerStats?.goal?.assists.toString()),
+            StatsPreviewWidget(
+                image: topYellowCards.value![0].player?.image,
+                statsTitle: "Yellow Cards",
+                statsNumber: topYellowCards.value![0].playerStats?.card?.yellow
+                    .toString()),
+            StatsPreviewWidget(
+                image: topRedCards.value![0].player?.image,
+                statsTitle: "Red Cards",
+                statsNumber:
+                    topRedCards.value![0].playerStats?.card?.red.toString())
+          ])
         ]),
       ),
     ));
