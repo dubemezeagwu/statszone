@@ -33,9 +33,9 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
 
   Widget _buildExpansionPanel(List<Item> data) {
     return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpand) {
+      expansionCallback: (int index, bool isExpanded) {
         setState(() {
-          data[index].isExpanded = !isExpand;
+          data[index].isExpanded = isExpanded;
         });
       },
       children: data.map<ExpansionPanel>((Item item) {

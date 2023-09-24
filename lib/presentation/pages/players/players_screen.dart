@@ -26,7 +26,8 @@ class _PlayersScreenState extends State<PlayersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Consumer(builder: ((context, ref, child) {
+    return SafeArea(
+      child: Consumer(builder: ((context, ref, child) {
       final playerData = ref.watch(playerViewModelProvider);
       return Column(
         children: [

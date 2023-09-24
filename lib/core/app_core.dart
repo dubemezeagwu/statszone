@@ -8,8 +8,7 @@ export 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 
-export "config/extensions.dart";
-export "config/size_config.dart";
+export 'package:flutter_screenutil/flutter_screenutil.dart';
 export "config/app_prefs.dart";
 export "constants/color_constants.dart";
 export "constants/image_constants.dart";

@@ -1,21 +1,21 @@
 import 'package:statszone/core/app_core.dart';
 
 class AppStyle {
-  static const TextStyle title = TextStyle(
+  static TextStyle title = TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 36,
+    fontSize: 36.sp,
     letterSpacing: -0.02,
   );
 
-  static const TextStyle header2 = TextStyle(
+  static TextStyle header2 = TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 30,
+    fontSize: 30.sp,
     letterSpacing: -0.02,
   );
 
-  static const TextStyle header3 = TextStyle(
+  static TextStyle header3 = TextStyle(
     fontWeight: FontWeight.w600,
-    fontSize: 24,
+    fontSize: 24.sp,
     letterSpacing: -0.02,
   );
 

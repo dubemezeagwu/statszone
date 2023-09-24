@@ -1,3 +1,4 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:global_configs/global_configs.dart';
 import 'package:statszone/presentation/app_presentation.dart';
 import 'package:statszone/presentation/navigation/navigation.dart';
@@ -24,13 +25,21 @@ class MyApp extends ConsumerWidget {
         // }
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: MaterialApp(
-          title: 'Stats Zone',
-          theme: themeStatus ? AppTheme.darkTheme() : AppTheme.lightTheme(),
-          debugShowCheckedModeBanner: false,
-          initialRoute: AppRoutes.navigation,
-          onGenerateRoute: AppNavigator.generateRoute,
-          ),
+      child: ScreenUtilInit(
+        minTextAdapt: true,
+        splitScreenMode: false,
+        designSize: const Size(390,844),
+        builder: (context, child) {
+          return MaterialApp(
+            title: 'Stats Zone',
+            theme: themeStatus ? AppTheme.darkTheme() : AppTheme.lightTheme(),
+            themeMode: ThemeMode.system,
+            debugShowCheckedModeBanner: false,
+            initialRoute: AppRoutes.navigation,
+            onGenerateRoute: AppNavigator.generateRoute,
+          );
+        },
+      ),
     );
   }
 }

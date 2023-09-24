@@ -15,7 +15,7 @@ class StatsScreen extends ConsumerWidget {
         child: SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20),
         child: Column(children: [
           Wrap(spacing: 55, children: [
             GestureDetector(
