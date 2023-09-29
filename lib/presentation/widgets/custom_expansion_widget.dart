@@ -26,37 +26,41 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        child: _buildExpansionPanel(_data),
+        child: _buildExpansionPanel(_data, context),
       ),
     );
   }
 
-  Widget _buildExpansionPanel(List<Item> data) {
+  Widget _buildExpansionPanel(List<Item> data, BuildContext context) {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
           data[index].isExpanded = isExpanded;
         });
       },
+      materialGapSize: 2,
       children: data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(
             headerBuilder: (
               BuildContext context,
               bool isExpanded,
             ) {
-              return CountryListTile(
+              return TeamListTile(
                 title: item.headerValue.team!.name!,
                 image: item.headerValue.team!.logo!,
               );
             },
             body: Column(
-              children: item.expandedValue.map(
-                (e) => ListTile(
-                  leading: e.icon,
-                  title: Text(e.title),
-                  dense: true,
-                  iconColor: kBlack,
-                )).toList(),
+              children: item.expandedValue
+                  .map((e) => ListTile(
+                        leading: e.icon,
+                        title: Text(e.title),
+                        dense: true,
+                        iconColor: context.theme.brightness == Brightness.dark 
+                        ? kWhite 
+                        : kBlack,
+                      ))
+                  .toList(),
             ),
             isExpanded: item.isExpanded);
       }).toList(),
@@ -64,11 +68,8 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
   }
 
   List<Item> generateItems({required List<TeamInfo> items}) {
-    return List<Item>.generate(
-        items.length,
-        (index) => Item(
-          expandedValue: categories, 
-          headerValue: items[index]));
+    return List<Item>.generate(items.length,
+        (index) => Item(expandedValue: categories, headerValue: items[index]));
   }
 }
 
@@ -93,7 +94,7 @@ class Category {
 }
 
 final List<Category> categories = [
-  Category("Team Information", const Icon(Icons.info)),
+  Category("Team Information", const Icon(Icons.info,)),
   Category("Form", const Icon(Icons.stacked_line_chart)),
   Category("Squad", const Icon(Icons.stadium))
 ];

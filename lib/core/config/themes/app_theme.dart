@@ -65,6 +65,10 @@ class AppTheme {
       //   popupMenuOpacity: 0.95,
       // ),
     );
+    // base.copyWith(
+    //   textTheme: _textTheme(base.textTheme, kBlack),
+    //   iconTheme: const IconThemeData(color: kBlack)
+    //   );
     return base;
   }
 
@@ -131,32 +135,27 @@ class AppTheme {
       //   popupMenuOpacity: 0.95,
       // ),
     );
+    // base.copyWith(
+    //   textTheme: _textTheme(base.textTheme, kWhite), 
+    //   iconTheme: const IconThemeData(color:kWhite));
     return base;
   }
 
   static TextTheme _textTheme(TextTheme base, Color color) {
-    final fontFamily = GoogleFonts.raleway().fontFamily;
     return base.copyWith(
-      displayLarge: AppStyle.title.copyWith(
-        fontFamily: fontFamily,
-        color: color,
-      ),
-      displayMedium:
-          AppStyle.header2.copyWith(fontFamily: fontFamily, color: color),
-      displaySmall:
-          AppStyle.header3.copyWith(fontFamily: fontFamily, color: color),
-      headlineMedium: base.headlineMedium?.copyWith(fontFamily: fontFamily, color: color),
-      headlineSmall: base.headlineSmall?.copyWith(fontFamily: fontFamily, color: color),
-      titleLarge: base.titleLarge?.copyWith(fontFamily: fontFamily, color: color),
-      labelLarge:
-          AppStyle.buttonText.copyWith(fontFamily: fontFamily, color: color),
-      bodySmall: base.bodySmall?.copyWith(fontFamily: fontFamily, color: color),
-      bodyLarge: base.bodyLarge?.copyWith(fontFamily: fontFamily, color: color),
-      bodyMedium: base.bodyMedium?.copyWith(fontFamily: fontFamily, color: color),
-      titleMedium:
-          AppStyle.subtitle.copyWith(fontFamily: fontFamily, color: color),
-      titleSmall: base.titleSmall?.copyWith(fontFamily: fontFamily, color: color),
-      labelSmall: base.labelSmall?.copyWith(fontFamily: fontFamily, color: color),
+      displayLarge: AppStyle.title.copyWith(color: color,),
+      displayMedium: AppStyle.header2.copyWith(color: color),
+      displaySmall: AppStyle.header3.copyWith(color: color),
+      headlineMedium: base.headlineMedium?.copyWith(color: color),
+      headlineSmall: base.headlineSmall?.copyWith(color: color),
+      titleLarge: base.titleLarge?.copyWith(color: color),
+      labelLarge: AppStyle.buttonText.copyWith(color: color),
+      bodySmall: base.bodySmall?.copyWith(color: color),
+      bodyLarge: base.bodyLarge?.copyWith(color: color),
+      bodyMedium: base.bodyMedium?.copyWith(color: color),
+      titleMedium: AppStyle.subtitle.copyWith(color: color),
+      titleSmall: base.titleSmall?.copyWith(color: color),
+      labelSmall: base.labelSmall?.copyWith(color: color),
     );
   }
   // static ThemeData lightTheme (){

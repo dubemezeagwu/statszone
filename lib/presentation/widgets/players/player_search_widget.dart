@@ -30,10 +30,7 @@ class PlayerSearchWidget extends StatelessWidget {
               imageUrl: playerImage!,
               errorWidget: (context, url, error) => const Icon(Icons.error),
             )),
-            title: Text(name, 
-              style: AppStyle.body.copyWith(
-              fontWeight: FontWeight.bold
-            ),),
+            title: Text(name, style: context.theme.textTheme.bodyLarge?.copyWith(color: kBlack),),
             subtitle: Row(
               children: [
                 SizedBox(
