@@ -3,8 +3,8 @@ import 'package:statszone/domain/app_domain.dart';
 
 class PlayerServices extends ApiService {
   Logger logger = Logger();
-  static String leagueId = "39";
-  static String currentSeason = "2022";
+  static const String leagueId = "39";
+  static const String currentSeason = "2022";
 
   Future<NetworkResponse<List<PlayerInfo>>> searchForPlayer(
       String playerName) async {
