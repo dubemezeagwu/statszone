@@ -67,6 +67,22 @@ class Player extends Equatable {
     );
   }
 
+  factory Player.fromDatabaseJson (Map<String, dynamic> json) {
+    return Player(
+      id: json["id"] as int?,
+      name: json["name"] as String?,
+      firstName: json["firstname"] as String?,
+      lastName: json["lastname"] as String?,
+      age: json["age"] as int?,
+      dateOfBirth: _DateOfBirth.fromJson(json["birth"]),
+      nationality: json["nationality"] as String?,
+      height: json["height"] as String?,
+      weight: json["weight"] as String?,
+      injured: json["injured"] == 1 ? true : false as bool?,
+      image: json["photo"] as String?,
+    );
+  }
+
   Map<String, dynamic> toJson () => {
     "id": id,
     "name": name,

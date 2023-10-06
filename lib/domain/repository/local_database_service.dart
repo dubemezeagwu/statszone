@@ -54,6 +54,43 @@ class LocalDatabase {
     return player.copyWith(id: id);
   }
 
+  Future<Player> getPlayer(int id) async {
+    final database = await instance.database;
+
+    final maps = await database.query(tablePlayers,
+        columns: PlayerFields.values,
+        where: "${PlayerFields.id} = ? ?",
+        whereArgs: [id]);
+
+    if (maps.isNotEmpty) {
+      return Player.fromDatabaseJson(maps.first);
+    } else {
+      throw Exception("ID $id not found");
+    }
+  }
+
+  Future<List<Player>> getAllPlayers() async {
+    final database = await instance.database;
+    final result = await database.query(tablePlayers);
+
+    return result.map((json) => Player.fromDatabaseJson(json)).toList();
+  }
+
+  Future<int> update(Player player) async {
+    final database = await instance.database;
+
+    return database.update(tablePlayers, player.toDatabaseJson(),
+        where: "${PlayerFields.id} = ?", whereArgs: [player.id]);
+  }
+
+  Future<int> delete(int id) async {
+    final database = await instance.database;
+
+    return await database.delete(
+      tablePlayers, 
+      where: "${PlayerFields.id} = ?", whereArgs: [id]);
+  }
+
   Future closeDatabase() async {
     final database = await instance.database;
     database.close();
@@ -63,6 +100,19 @@ class LocalDatabase {
 const String tablePlayers = "players";
 
 class PlayerFields {
+  static const List<String> values = [
+    id,
+    name,
+    firstName,
+    lastName,
+    age,
+    nationality,
+    height,
+    weight,
+    image,
+    injured,
+    dateOfBirth
+  ];
   static const String id = "_id";
   static const String name = "name";
   static const String firstName = "firstName";
