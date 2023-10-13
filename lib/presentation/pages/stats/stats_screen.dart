@@ -21,8 +21,7 @@ class StatsScreen extends ConsumerWidget {
             GestureDetector(
               onTap: () {
                 AppNavigator.navigateToPage(
-                    routeName: AppRoutes.playerDetails, 
-                    context: context);
+                    routeName: AppRoutes.playerDetails, context: context);
               },
               child: StatsPreviewWidget(
                   image: topGoals.value![0].player?.image,

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:statszone/presentation/app_presentation.dart';
 
 class PlayerDetailedScreen extends StatelessWidget {
   const PlayerDetailedScreen({super.key});
@@ -11,49 +11,41 @@ class PlayerDetailedScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            expandedHeight: 350,
+            expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: CachedNetworkImage(
-                height: 300,
-                width: 400,
-                imageUrl: "https://media-2.api-sports.io/football/players/1100.png",
-                ),
-                title: Text("Erling Haaland"),
-                ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: ClipRect(
-                  child: Container(
-                    height: 400,
-                    color: Colors.amber,
+              background: Center(
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "https://media-2.api-sports.io/football/players/1100.png",
                   ),
                 ),
               ),
+              title: Text("Erling Haaland"),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: ClipRect(
-                  child: Container(
-                    height: 400,
-                    color: Colors.amber,
-                  ),
-                ),
-              ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl:
+                          "https://media-4.api-sports.io/football/teams/50.png",
+                      width: 50.w,
+                      height: 50.h,
+                    ),
+                    SizedBox(
+                      width: 16.w,
+                    ),
+                    Text("Manchester City")
+                  ],
+                )
+              ]),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: ClipRect(
-                  child: Container(
-                    height: 400,
-                    color: Colors.amber,
-                  ),
-                ),
-              ),
-            )
+          )
         ],
       ),
     );

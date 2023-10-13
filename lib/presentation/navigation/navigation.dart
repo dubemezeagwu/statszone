@@ -2,7 +2,6 @@ import 'package:statszone/presentation/app_presentation.dart';
 import 'package:flutter/cupertino.dart';
 
 class NavigationWidget extends StatefulWidget {
-
   const NavigationWidget({
     Key? key,
   }) : super(key: key);
@@ -51,7 +50,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
                   InkWell(
                     child: theme
                         ? const Icon(Icons.mode_night)
-                        : const Icon (Icons.sunny),
+                        : const Icon(Icons.sunny),
                   ).paddingRight(4),
                   CupertinoSwitch(
                     key: const Key("themeSwitch"),

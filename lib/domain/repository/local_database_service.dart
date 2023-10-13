@@ -86,9 +86,8 @@ class LocalDatabase {
   Future<int> delete(int id) async {
     final database = await instance.database;
 
-    return await database.delete(
-      tablePlayers, 
-      where: "${PlayerFields.id} = ?", whereArgs: [id]);
+    return await database
+        .delete(tablePlayers, where: "${PlayerFields.id} = ?", whereArgs: [id]);
   }
 
   Future closeDatabase() async {
