@@ -98,7 +98,9 @@ class LocalDatabase {
 
 const String tablePlayers = "players";
 
+@immutable
 class PlayerFields {
+  PlayerFields._();
   static const List<String> values = [
     id,
     name,

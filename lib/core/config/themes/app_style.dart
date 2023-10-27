@@ -2,7 +2,7 @@ import 'package:statszone/core/app_core.dart';
 
 class AppStyle {
   static final fontFamily = GoogleFonts.raleway().fontFamily;
-  static TextStyle title = TextStyle(
+  static TextStyle header1 = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 36.sp,
     fontFamily: fontFamily,

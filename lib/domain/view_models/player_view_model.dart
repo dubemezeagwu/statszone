@@ -35,3 +35,5 @@ final searchAllPlayersProvider =
   final response = await _playerServices.searchForPlayer(playerName);
   if (response.status == true) return response.data;
 });
+
+final selectedPlayerProvider = StateProvider<PlayerInfo?>((ref) => null);

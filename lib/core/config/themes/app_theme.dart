@@ -143,7 +143,7 @@ class AppTheme {
 
   static TextTheme _textTheme(TextTheme base, Color color) {
     return base.copyWith(
-      displayLarge: AppStyle.title.copyWith(color: color,),
+      displayLarge: AppStyle.header1.copyWith(color: color,),
       displayMedium: AppStyle.header2.copyWith(color: color),
       displaySmall: AppStyle.header3.copyWith(color: color),
       headlineMedium: base.headlineMedium?.copyWith(color: color),

@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/presentation/app_presentation.dart';
 
-class PlayerDetailedScreen extends StatelessWidget {
-  const PlayerDetailedScreen({super.key});
+class PlayerDetailedScreen extends ConsumerWidget {
+  const PlayerDetailedScreen({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final player = ref.read(selectedPlayerProvider);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -17,37 +21,88 @@ class PlayerDetailedScreen extends StatelessWidget {
                 child: ClipOval(
                   child: CachedNetworkImage(
                     imageUrl:
-                        "https://media-2.api-sports.io/football/players/1100.png",
+                        player!.player!.image!,
                   ),
                 ),
               ),
-              title: Text("Erling Haaland"),
+              title: Text(player!.player!.name!),
             ),
           ),
           SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(children: [
-                Row(
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CachedNetworkImage(
-                      imageUrl:
-                          "https://media-4.api-sports.io/football/teams/50.png",
+                      imageUrl: player.playerStats!.team?.logo ?? '',
                       width: 50.w,
                       height: 50.h,
                     ),
                     SizedBox(
                       width: 16.w,
                     ),
-                    Text("Manchester City")
+                    Text(
+                        player.playerStats!.team?.name ?? '',
+                      style: context.textTheme.bodyLarge,
+                    )
                   ],
-                )
-              ]),
-            ),
+                ),
+              ),
+              const Divider(
+                thickness: 2,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    customInfo(
+                      title: "NATIONALITY",
+                      subTitle: player.player?.nationality ?? '',
+                    ),
+                    customInfo(
+                      title: "DATE OF BIRTH",
+                      subTitle: player.player!.dateOfBirth!.date?.formatDate ?? '',
+                    ),
+                    customInfo(title: "HEIGHT", subTitle: player.player!.height ?? 'NIL')
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    customInfo(title: "WEIGHT", subTitle: player.player!.weight ?? 'NIL',),
+                    customInfo(title: "POSITION", subTitle: player.playerStats!.game!.position),
+                    customInfo(title: "AGE", subTitle: "${player!.player!.age.toString()} yrs")
+                  ],
+                ),
+              ),
+              Divider(
+                thickness: 2,
+              ),
+            ]),
           )
         ],
       ),
+    );
+  }
+
+  Widget customInfo({required String title, required String subTitle}) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: AppStyle.body.copyWith(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 2.h,
+        ),
+        Text(subTitle),
+      ],
     );
   }
 }

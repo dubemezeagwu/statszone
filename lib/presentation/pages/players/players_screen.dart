@@ -14,12 +14,6 @@ class _PlayersScreenState extends ConsumerState<PlayersScreen> {
   String playerName = "";
   final TextEditingController _searchController = TextEditingController();
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   ref.read(playerSearchFutureProvider(playerName));
-  // }
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -57,38 +51,45 @@ class _PlayersScreenState extends ConsumerState<PlayersScreen> {
           height: 6.h,
         ),
         Consumer(builder: ((context, ref, child) {
-          return playerData.when(
-            data: ((data) {
-              if (data == null || data.isEmpty) {
-                return const Center(
-                  child: Text("Search Players"),
-                );
-              } else {
-                return Expanded(
-                  child: ListView.builder(
-                      itemCount: data.length,
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return PlayerSearchWidget(
-                          playerImage: data[index].player?.image,
-                          name: data[index].player!.name!,
-                          teamLogo: data[index].playerStats!.team?.logo,
-                          teamName: data[index].playerStats!.team?.name,
-                          position: data[index].playerStats!.game?.position,
-                        );
-                      }),
-                );
-              }}), 
-              error: ((error, stackTrace) {
-                return const Center(child: Text("Error Occurred!"));}), 
-              loading: (() {
-                return const Expanded(
-                  child: Center(
-                    child: CustomizedLoader()
-                    ),
-                );
-              }));
+          return playerData.when(data: ((data) {
+            if (data == null || data.isEmpty) {
+              return const Center(
+                child: Text("Search Players"),
+              );
+            } else {
+              return Expanded(
+                child: ListView.builder(
+                    itemCount: data.length,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final player = data[index];
+                      return GestureDetector(
+                        onTap: () {
+                          ref.read(selectedPlayerProvider.notifier).state =
+                              player;
+                          AppNavigator.navigateToPage(
+                              routeName: AppRoutes.playerDetails,
+                              context: context);
+                        },
+                        child: PlayerSearchWidget(
+                          playerImage: player.player?.image,
+                          name: player.player!.name!,
+                          teamLogo: player.playerStats!.team?.logo,
+                          teamName: player.playerStats!.team?.name,
+                          position: player.playerStats!.game?.position,
+                        ),
+                      );
+                    }),
+              );
+            }
+          }), error: ((error, stackTrace) {
+            return const Center(child: Text("Error Occurred!"));
+          }), loading: (() {
+            return const Expanded(
+              child: Center(child: CustomizedLoader()),
+            );
+          }));
         }))
       ],
     ));

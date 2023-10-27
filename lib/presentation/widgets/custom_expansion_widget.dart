@@ -56,9 +56,9 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
                         leading: e.icon,
                         title: Text(e.title),
                         dense: true,
-                        iconColor: context.theme.brightness == Brightness.dark 
-                        ? kWhite 
-                        : kBlack,
+                        iconColor: context.theme.brightness == Brightness.dark
+                            ? kWhite
+                            : kBlack,
                       ))
                   .toList(),
             ),
@@ -68,8 +68,10 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
   }
 
   List<Item> generateItems({required List<TeamInfo> items}) {
-    return List<Item>.generate(items.length,
-        (index) => Item(expandedValue: categories, headerValue: items[index]));
+    return List<Item>.generate(
+        items.length,
+        (index) =>
+            Item(expandedValue: TeamOptions.values, headerValue: items[index]));
   }
 }
 
@@ -81,20 +83,35 @@ class Item {
     this.isExpanded = false,
   });
 
-  List<Category> expandedValue;
+  List<TeamOptions> expandedValue;
   TeamInfo headerValue;
   bool isExpanded;
 }
 
-class Category {
+// class Category {
+//   final String title;
+//   final Icon icon;
+
+//   Category(this.title, this.icon);
+// }
+
+// final List<Category> categories = [
+//   Category(
+//       "Team Information",
+//       const Icon(
+//         Icons.info,
+//       )),
+//   Category("Form", const Icon(Icons.stacked_line_chart)),
+//   Category("Squad", const Icon(Icons.stadium))
+// ];
+
+enum TeamOptions {
+  teamInformation("Team Information", Icon(Icons.info)),
+  form("Form", Icon(Icons.stacked_line_chart)),
+  squad("Squad", Icon(Icons.stadium));
+
   final String title;
   final Icon icon;
 
-  Category(this.title, this.icon);
+  const TeamOptions(this.title, this.icon);
 }
-
-final List<Category> categories = [
-  Category("Team Information", const Icon(Icons.info,)),
-  Category("Form", const Icon(Icons.stacked_line_chart)),
-  Category("Squad", const Icon(Icons.stadium))
-];

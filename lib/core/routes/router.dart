@@ -30,7 +30,7 @@ class AppNavigator {
     switch (settings.name) {
       case AppRoutes.playerDetails:
         return _getPageRoute(
-            routeName: settings.name, view: const PlayerDetailedScreen());
+            routeName: settings.name, view: PlayerDetailedScreen());
       case AppRoutes.navigation:
         return _getPageRoute(
             routeName: settings.name, view: const NavigationWidget());

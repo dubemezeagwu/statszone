@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:statszone/core/app_core.dart';
 
 extension StringExtension on String {
@@ -167,6 +168,16 @@ extension DateTImeExtension on DateTime {
     } else {
       return '${years.round()} years ago';
     }
+  }
+}
+
+extension DateFormatExtension on String {
+  String get formatDate {
+    final date = DateTime.parse(this);
+    final month = DateFormat.MMMM().format(date);
+    final day = DateFormat.d().format(date);
+    final year = DateFormat.y().format(date);
+    return '$year $month $day';
   }
 }
 
