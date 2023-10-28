@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:statszone/domain/app_domain.dart';
-import 'package:statszone/presentation/app_presentation.dart';
+import 'package:statszone/presentation/widgets/charts/custom_spider_chart.dart';
 
 class PlayerDetailedScreen extends ConsumerWidget {
   const PlayerDetailedScreen({
@@ -19,9 +21,9 @@ class PlayerDetailedScreen extends ConsumerWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: Center(
                 child: ClipOval(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: CachedNetworkImage(
-                    imageUrl:
-                        player!.player!.image!,
+                    imageUrl: player!.player!.image!,
                   ),
                 ),
               ),
@@ -29,62 +31,86 @@ class PlayerDetailedScreen extends ConsumerWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: player.playerStats!.team?.logo ?? '',
-                      width: 50.w,
-                      height: 50.h,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: player.playerStats!.team?.logo ?? '',
+                          width: 50.w,
+                          height: 50.h,
+                        ),
+                        SizedBox(
+                          width: 16.w,
+                        ),
+                        Text(
+                          player.playerStats!.team?.name ?? '',
+                          style: context.textTheme.bodyLarge,
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      width: 16.w,
+                  ),
+                  divider,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        customInfo(
+                          title: "NATIONALITY",
+                          subTitle: player.player?.nationality ?? '',
+                        ),
+                        customInfo(
+                          title: "DATE OF BIRTH",
+                          subTitle:
+                              player.player!.dateOfBirth!.date?.formatDate ??
+                                  '',
+                        ),
+                        customInfo(
+                            title: "HEIGHT",
+                            subTitle: player.player!.height ?? 'NIL')
+                      ],
                     ),
-                    Text(
-                        player.playerStats!.team?.name ?? '',
-                      style: context.textTheme.bodyLarge,
-                    )
-                  ],
-                ),
-              ),
-              const Divider(
-                thickness: 2,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    customInfo(
-                      title: "NATIONALITY",
-                      subTitle: player.player?.nationality ?? '',
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        customInfo(
+                          title: "WEIGHT",
+                          subTitle: player.player!.weight ?? 'NIL',
+                        ),
+                        customInfo(
+                            title: "POSITION",
+                            subTitle: player.playerStats!.game!.position),
+                        customInfo(
+                            title: "AGE",
+                            subTitle: "${player!.player!.age.toString()} yrs")
+                      ],
                     ),
-                    customInfo(
-                      title: "DATE OF BIRTH",
-                      subTitle: player.player!.dateOfBirth!.date?.formatDate ?? '',
+                  ),
+                  divider,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
                     ),
-                    customInfo(title: "HEIGHT", subTitle: player.player!.height ?? 'NIL')
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    customInfo(title: "WEIGHT", subTitle: player.player!.weight ?? 'NIL',),
-                    customInfo(title: "POSITION", subTitle: player.playerStats!.game!.position),
-                    customInfo(title: "AGE", subTitle: "${player!.player!.age.toString()} yrs")
-                  ],
-                ),
-              ),
-              Divider(
-                thickness: 2,
-              ),
-            ]),
+                    child: Text("Attribute Overview",
+                    style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 48.h,
+                  ),
+                  CustomSpiderChart(playerAttributes: generateRandomNumbers(),),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                ]),
           )
         ],
       ),
@@ -105,4 +131,9 @@ class PlayerDetailedScreen extends ConsumerWidget {
       ],
     );
   }
+
+List<double> generateRandomNumbers() {
+  final random = Random();
+  return List.generate(5, (index) => (30 + random.nextDouble() * 70));
+}
 }

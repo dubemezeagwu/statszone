@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 const int SERVER_OKAY = 200;
 const int NO_CONTENT = 204;
 const int TIME_OUT = 499;
@@ -25,3 +27,7 @@ class AppStrings {
   static const String stats = "Stats";
   static const String favourites = "Favourites";
 }
+
+const Widget divider = Divider(
+  thickness: 2,
+);

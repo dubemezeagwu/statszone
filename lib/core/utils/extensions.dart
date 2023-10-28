@@ -181,6 +181,22 @@ extension DateFormatExtension on String {
   }
 }
 
+extension DoubleExtension on double {
+  Color get color {
+    if (this <= 49) {
+      return kGrey500;
+    } else if (this <= 59) {
+      return kAmber;
+    } else if (this <= 69) {
+      return kYellow;
+    } else if (this <= 79) {
+      return kGreen;
+    } else {
+      return kDarkGreen;
+    }
+  }
+}
+
 extension BuildContextExtensions on BuildContext {
   ThemeData get theme => Theme.of(this);
   ColorScheme get colorScheme => theme.colorScheme;
