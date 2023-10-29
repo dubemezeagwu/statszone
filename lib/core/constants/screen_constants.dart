@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:statszone/core/constants/color_constants.dart';
 
 const int SERVER_OKAY = 200;
 const int NO_CONTENT = 204;
@@ -30,4 +31,20 @@ class AppStrings {
 
 const Widget divider = Divider(
   thickness: 2,
+);
+
+const Widget yellowCard = SizedBox(
+  height: 40,
+  width: 30,
+  child:   Card(
+    color: kAmber,
+  ),
+);
+
+const Widget redCard = SizedBox(
+  height: 40,
+  width: 30,
+  child:   Card(
+    color: kSecondary,
+  ),
 );
