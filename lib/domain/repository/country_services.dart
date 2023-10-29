@@ -75,7 +75,6 @@ class CountryServices extends ApiService {
                 "x-rapidapi-host": baseUrl
               })
       );
-      // logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {
@@ -83,7 +82,6 @@ class CountryServices extends ApiService {
             res.data["response"].forEach((a) {
               list.add(League.fromJson(a["league"]));
             });
-            logger.d("Log 1: ${list[2].toJson()}");
             return NetworkResponse(
                 message: "Successful",
                 status: true,

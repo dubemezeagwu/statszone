@@ -1,7 +1,8 @@
 import 'package:logger/logger.dart';
 import 'package:statszone/domain/app_domain.dart';
 
-final countryViewModelProvider = Provider((ref) => CountryViewModel(ref.watch(countryRepositoryProvider)));
+final countryViewModelProvider =
+    Provider((ref) => CountryViewModel(ref.watch(countryRepositoryProvider)));
 
 class CountryViewModel {
   final CountryServices _countryServices;
@@ -34,7 +35,6 @@ class CountryViewModel {
             await _countryServices.getLeaguesForCountries(country.code!);
         if (response.status == true) {
           currentLeagues = response.data ?? [];
-          logger.d("Log x: ${currentLeagues[1].toJson()}");
           return currentLeagues;
         } else {
           errorMessage = response.message;

@@ -8,14 +8,12 @@ class TeamServices extends ApiService {
 
   Future<NetworkResponse<List<TeamInfo>>> getTeamsFromLeague() async {
     final String url = "$baseUrl/teams?season=$currentSeason&league=$leagueId";
-    logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(url,
           options: defaultOptions.copyWith(headers: <String, String>{
             "x-rapidapi-key": apiKey,
             "x-rapidapi-host": baseUrl
           }));
-      logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {

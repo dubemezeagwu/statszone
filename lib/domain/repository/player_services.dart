@@ -51,14 +51,12 @@ class PlayerServices extends ApiService {
   Future<NetworkResponse<List<PlayerInfo>>> getTopGoalScorers() async {
     final String url =
         "$baseUrl/players/topscorers?season=$currentSeason&league=$leagueId";
-    logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(url,
           options: defaultOptions.copyWith(headers: <String, String>{
             "x-rapidapi-key": apiKey,
             "x-rapidapi-host": baseUrl
           }));
-      logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {
@@ -92,14 +90,12 @@ class PlayerServices extends ApiService {
   Future<NetworkResponse<List<PlayerInfo>>> getTopAssists() async {
     final String url =
         "$baseUrl/players/topassists?season=$currentSeason&league=$leagueId";
-    logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(url,
           options: defaultOptions.copyWith(headers: <String, String>{
             "x-rapidapi-key": apiKey,
             "x-rapidapi-host": baseUrl
           }));
-      logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {
@@ -133,14 +129,12 @@ class PlayerServices extends ApiService {
   Future<NetworkResponse<List<PlayerInfo>>> getTopYellowCards() async {
     final String url =
         "$baseUrl/players/topyellowcards?season=$currentSeason&league=$leagueId";
-    logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(url,
           options: defaultOptions.copyWith(headers: <String, String>{
             "x-rapidapi-key": apiKey,
             "x-rapidapi-host": baseUrl
           }));
-      logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {
@@ -174,14 +168,12 @@ class PlayerServices extends ApiService {
   Future<NetworkResponse<List<PlayerInfo>>> getTopRedCards() async {
     final String url =
         "$baseUrl/players/topredcards?season=$currentSeason&league=$leagueId";
-    logger.i('Making request to $baseUrl');
     try {
       final Response res = await dio.get(url,
           options: defaultOptions.copyWith(headers: <String, String>{
             "x-rapidapi-key": apiKey,
             "x-rapidapi-host": baseUrl
           }));
-      logger.d(res.data);
       switch (res.statusCode) {
         case SERVER_OKAY:
           try {

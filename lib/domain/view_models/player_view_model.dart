@@ -1,4 +1,5 @@
 import 'package:statszone/domain/app_domain.dart';
+
 final playerViewModelProvider =
     StateNotifierProvider<PlayerViewModel, List<PlayerInfo>>(
   (ref) {
@@ -15,7 +16,8 @@ class PlayerViewModel extends StateNotifier<List<PlayerInfo>> {
 
 final searchAllPlayersProvider =
     FutureProviderFamily((ref, String playerName) async {
-  final response = await ref.watch(playerRepositoryProvider).searchForPlayer(playerName);
+  final response =
+      await ref.watch(playerRepositoryProvider).searchForPlayer(playerName);
   if (response.status == true) return response.data;
 });
 
