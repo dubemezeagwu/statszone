@@ -1,5 +1,7 @@
 import 'package:statszone/presentation/navigation/navigation.dart';
 import 'package:statszone/presentation/pages/player_detailed_screen.dart';
+import 'package:statszone/presentation/pages/stats/stats_detailed_screen.dart';
+import 'package:statszone/presentation/pages/stats/stats_screen.dart';
 
 import '../app_core.dart';
 
@@ -30,10 +32,13 @@ class AppNavigator {
     switch (settings.name) {
       case AppRoutes.playerDetails:
         return _getPageRoute(
-            routeName: settings.name, view: PlayerDetailedScreen());
+            routeName: settings.name, view: const PlayerDetailedScreen());
       case AppRoutes.navigation:
         return _getPageRoute(
             routeName: settings.name, view: const NavigationWidget());
+      case AppRoutes.statsDetails:
+        return _getPageRoute(
+            routeName: settings.name, view: const StatsDetailedScreen());      
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

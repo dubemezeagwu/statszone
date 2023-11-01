@@ -1,5 +1,5 @@
 import 'package:statszone/domain/app_domain.dart';
-import 'package:statszone/presentation/widgets/country_list_tile.dart';
+import 'package:statszone/presentation/widgets/team_list_tile.dart';
 
 class CustomExpansionWidget extends StatefulWidget {
   final List<TeamInfo> teamData;
@@ -87,23 +87,6 @@ class Item {
   TeamInfo headerValue;
   bool isExpanded;
 }
-
-// class Category {
-//   final String title;
-//   final Icon icon;
-
-//   Category(this.title, this.icon);
-// }
-
-// final List<Category> categories = [
-//   Category(
-//       "Team Information",
-//       const Icon(
-//         Icons.info,
-//       )),
-//   Category("Form", const Icon(Icons.stacked_line_chart)),
-//   Category("Squad", const Icon(Icons.stadium))
-// ];
 
 enum TeamOptions {
   teamInformation("Team Information", Icon(Icons.info)),

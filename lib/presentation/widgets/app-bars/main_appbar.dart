@@ -3,14 +3,14 @@ import 'package:statszone/presentation/app_presentation.dart';
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool automaticallyImplyLeading;
-  final List<Widget> actions;
+  final List<Widget>? actions;
   PreferredSizeWidget? bottom;
 
   MainAppBar(
       {Key? key, 
       required this.title, 
       required this.automaticallyImplyLeading, 
-      required this.actions})
+      this.actions})
       : super(key: key);
 
   @override
