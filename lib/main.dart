@@ -43,8 +43,3 @@ class MyApp extends ConsumerWidget {
   }
 }
 
-// var appProviders = [
-//   ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
-//   ChangeNotifierProvider<CountryViewModel>(create: (_) => CountryViewModel())
-// ];
-

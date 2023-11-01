@@ -184,7 +184,7 @@ extension DateFormatExtension on String {
 extension DoubleExtension on double {
   Color get color {
     if (this <= 49) {
-      return kGrey500;
+      return kSecondary;
     } else if (this <= 59) {
       return kAmber;
     } else if (this <= 69) {
