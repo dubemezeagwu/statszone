@@ -1,15 +1,14 @@
 import 'package:statszone/presentation/navigation/navigation.dart';
 import 'package:statszone/presentation/pages/player_detailed_screen.dart';
 import 'package:statszone/presentation/pages/stats/stats_detailed_screen.dart';
-import 'package:statszone/presentation/pages/stats/stats_screen.dart';
 
 import '../app_core.dart';
 
 class AppNavigator {
   // NAVIGATE TO A PAGE WITHOUT REPLACING THE PREVIOUS PAGE.
   static void navigateToPage(
-          {required String routeName, required BuildContext context}) =>
-      Navigator.of(context).pushNamed(routeName);
+          {required String routeName, required BuildContext context, Object? arguments}) =>
+      Navigator.of(context).pushNamed(routeName, arguments: arguments);
 
   // NAVIGATE TO A PAGE AND REPLACE THE PREVIOUS PAGE
   static void navigateToReplacementPage(
@@ -32,13 +31,15 @@ class AppNavigator {
     switch (settings.name) {
       case AppRoutes.playerDetails:
         return _getPageRoute(
-            routeName: settings.name, view: const PlayerDetailedScreen());
+            routeName: settings.name,
+            view: const PlayerDetailedScreen(),
+            args: settings.arguments);
       case AppRoutes.navigation:
         return _getPageRoute(
             routeName: settings.name, view: const NavigationWidget());
       case AppRoutes.statsDetails:
         return _getPageRoute(
-            routeName: settings.name, view: const StatsDetailedScreen());      
+            routeName: settings.name, view:  StatsDetailedScreen(settings.arguments as AggregateType));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

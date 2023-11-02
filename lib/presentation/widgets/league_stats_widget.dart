@@ -52,7 +52,7 @@ class LeagueStatsTopWidget extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "39",
+                    value,
                     style: context.textTheme.displayLarge,
                   )
                 ],
@@ -61,8 +61,8 @@ class LeagueStatsTopWidget extends StatelessWidget {
             CachedNetworkImage(
               imageUrl:
                   playerPhoto,
-              width: 200.w,
-              height: 200.h,
+              width: 180.w,
+              height: 180.h,
             ),
           ],
         ));
