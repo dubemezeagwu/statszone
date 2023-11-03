@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
 import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/domain/view_models/stats_view_model.dart';
 import 'package:statszone/presentation/app_presentation.dart';
-import 'package:statszone/presentation/widgets/app-bars/main_appbar.dart';
 import 'package:statszone/presentation/widgets/league_stats_widget.dart';
 
 class StatsDetailedScreen extends ConsumerWidget {
@@ -18,11 +16,10 @@ class StatsDetailedScreen extends ConsumerWidget {
         automaticallyImplyLeading: true,
       ),
       body: SingleChildScrollView(
-          scrollDirection: Axis.vertical, child: aggregateBuilder(ref)),
+          scrollDirection: Axis.vertical, child: detailedStatsBuilder(ref)),
     );
   }
-
-  Widget aggregateBuilder(WidgetRef ref) {
+  Widget detailedStatsBuilder(WidgetRef ref) {
     switch (type) {
       case AggregateType.goals:
         final topGoalScorers = ref.watch(topGoalsFutureProvider).value;
@@ -106,7 +103,7 @@ class ReusableStatsWidget extends StatelessWidget {
     switch (type) {
       case AggregateType.goals:
         return LeagueStatsTopWidget(
-          name: data![0].player?.name ?? "",
+          name: data[0].player?.name ?? "",
           teamName: data[0].playerStats?.team?.name ?? "",
           teamLogo: data[0].playerStats?.team?.logo ?? "",
           playerPhoto: data[0].player?.image ?? "",
@@ -114,7 +111,7 @@ class ReusableStatsWidget extends StatelessWidget {
         );
       case AggregateType.assists:
         return LeagueStatsTopWidget(
-          name: data![0].player?.name ?? "",
+          name: data[0].player?.name ?? "",
           teamName: data[0].playerStats?.team?.name ?? "",
           teamLogo: data[0].playerStats?.team?.logo ?? "",
           playerPhoto: data[0].player?.image ?? "",
@@ -122,7 +119,7 @@ class ReusableStatsWidget extends StatelessWidget {
         );
       case AggregateType.redCards:
         return LeagueStatsTopWidget(
-          name: data![0].player?.name ?? "",
+          name: data[0].player?.name ?? "",
           teamName: data[0].playerStats?.team?.name ?? "",
           teamLogo: data[0].playerStats?.team?.logo ?? "",
           playerPhoto: data[0].player?.image ?? "",
@@ -130,7 +127,7 @@ class ReusableStatsWidget extends StatelessWidget {
         );
       case AggregateType.yellowCards:
         return LeagueStatsTopWidget(
-          name: data![0].player?.name ?? "",
+          name: data[0].player?.name ?? "",
           teamName: data[0].playerStats?.team?.name ?? "",
           teamLogo: data[0].playerStats?.team?.logo ?? "",
           playerPhoto: data[0].player?.image ?? "",
