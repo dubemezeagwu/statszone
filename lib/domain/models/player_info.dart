@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:statszone/domain/models/player-stats/player_stats.dart';
 import 'package:statszone/domain/models/player.dart';
 
-class PlayerInfo extends Equatable{
+class PlayerInfo extends Equatable {
   final Player? player;
   final PlayerStats? playerStats;
 

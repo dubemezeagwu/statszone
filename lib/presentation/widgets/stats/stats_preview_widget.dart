@@ -16,7 +16,7 @@ class StatsPreviewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150.h,
-      margin: EdgeInsets.only(top: 50),
+      margin: const EdgeInsets.only(top: 50),
       decoration: BoxDecoration(
           color: kBlueGrey,
           border: Border.all(

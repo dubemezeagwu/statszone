@@ -1,7 +1,7 @@
 import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/presentation/widgets/team_list_tile.dart';
 
-class CustomExpansionWidget extends StatefulWidget {
+class CustomExpansionWidget extends ConsumerStatefulWidget {
   final List<TeamInfo> teamData;
 
   const CustomExpansionWidget({
@@ -10,10 +10,11 @@ class CustomExpansionWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomExpansionWidget> createState() => _CustomExpansionWidgetState();
+  ConsumerState<CustomExpansionWidget> createState() =>
+      _CustomExpansionWidgetState();
 }
 
-class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
+class _CustomExpansionWidgetState extends ConsumerState<CustomExpansionWidget> {
   List<Item> _data = <Item>[];
 
   @override
@@ -23,7 +24,9 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return SingleChildScrollView(
       child: Container(
         child: _buildExpansionPanel(_data, context),
@@ -50,18 +53,38 @@ class _CustomExpansionWidgetState extends State<CustomExpansionWidget> {
                 image: item.headerValue.team!.logo!,
               );
             },
-            body: Column(
-              children: item.expandedValue
-                  .map((e) => ListTile(
-                        leading: e.icon,
-                        title: Text(e.title),
-                        dense: true,
-                        iconColor: context.theme.brightness == Brightness.dark
-                            ? kWhite
-                            : kBlack,
-                      ))
-                  .toList(),
-            ),
+            body: Consumer(builder: ((context, ref, child) {
+              final teamId = item.headerValue.team!.id;
+              final squad = ref.watch(getSquadProvider(teamId.toString())).value;
+              return Column(
+                children: item.expandedValue
+                    .map((e) => InkWell(
+                          onTap: (() {
+                            ref.watch(selectedSquadProvider.notifier).state =
+                              squad;
+                            (e.title == TeamOptions.squad.title)
+                                ? AppNavigator.navigateToPage(
+                                    routeName: AppRoutes.squadInfo,
+                                    context: context,
+                                    )
+                                : AppNavigator.navigateToPage(
+                                    routeName: AppRoutes.teamInfo,
+                                    context: context,
+                                  );
+                          }),
+                          child: ListTile(
+                            leading: e.icon,
+                            title: Text(e.title),
+                            dense: true,
+                            iconColor:
+                                context.theme.brightness == Brightness.dark
+                                    ? kWhite
+                                    : kBlack,
+                          ),
+                        ))
+                    .toList(),
+              );
+            })),
             isExpanded: item.isExpanded);
       }).toList(),
     );
@@ -88,13 +111,3 @@ class Item {
   bool isExpanded;
 }
 
-enum TeamOptions {
-  teamInformation("Team Information", Icon(Icons.info)),
-  form("Form", Icon(Icons.stacked_line_chart)),
-  squad("Squad", Icon(Icons.stadium));
-
-  final String title;
-  final Icon icon;
-
-  const TeamOptions(this.title, this.icon);
-}
