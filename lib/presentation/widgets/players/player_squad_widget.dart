@@ -37,6 +37,9 @@ class PlayerSquadWidget extends StatelessWidget {
               playerNumber ?? "00",
               style: context.theme.textTheme.bodyLarge?.copyWith(color: kBlack),
             ),
+            const SizedBox(
+              width: 4,
+            ),
             Container(
               width: 5,
               height: 5,

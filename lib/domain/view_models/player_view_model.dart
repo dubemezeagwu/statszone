@@ -22,6 +22,16 @@ final searchAllPlayersProvider =
   if (response.status == true) return response.data;
 });
 
+final getPlayerByIdProvider =
+    FutureProviderFamily((ref, String playerId) async {
+  final response =
+      await ref.watch(playerRepositoryProvider).getPlayerById(playerId);
+  if (response.status == true) {
+    print(response.data);
+    return response.data;
+  }
+});
+
 final getSquadProvider = FutureProviderFamily((ref, String teamId) async {
   final response = await ref
       .watch(playerRepositoryProvider)
@@ -32,4 +42,3 @@ final getSquadProvider = FutureProviderFamily((ref, String teamId) async {
 final selectedPlayerProvider = StateProvider<PlayerInfo?>((ref) => null);
 
 final selectedSquadProvider = StateProvider<SquadInfo?>((ref) => null);
-

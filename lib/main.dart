@@ -1,7 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:global_configs/global_configs.dart';
 import 'package:statszone/presentation/app_presentation.dart';
-import 'package:statszone/presentation/navigation/navigation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,13 +28,12 @@ class MyApp extends ConsumerWidget {
         splitScreenMode: false,
         designSize: const Size(390,844),
         builder: (context, child) {
-          return MaterialApp(
+          return MaterialApp.router(
             title: 'Stats Zone',
             theme: themeStatus ? AppTheme.darkTheme() : AppTheme.lightTheme(),
             themeMode: ThemeMode.system,
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.navigation,
-            onGenerateRoute: AppNavigator.generateRoute,
+            routerConfig: AppNavigator.router,
           );
         },
       ),

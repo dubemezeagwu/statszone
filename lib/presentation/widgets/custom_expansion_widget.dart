@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:statszone/domain/app_domain.dart';
 import 'package:statszone/presentation/widgets/team_list_tile.dart';
 
@@ -55,22 +56,17 @@ class _CustomExpansionWidgetState extends ConsumerState<CustomExpansionWidget> {
             },
             body: Consumer(builder: ((context, ref, child) {
               final teamId = item.headerValue.team!.id;
-              final squad = ref.watch(getSquadProvider(teamId.toString())).value;
+              final squad =
+                  ref.watch(getSquadProvider(teamId.toString())).value;
               return Column(
                 children: item.expandedValue
                     .map((e) => InkWell(
                           onTap: (() {
                             ref.watch(selectedSquadProvider.notifier).state =
-                              squad;
+                                squad;
                             (e.title == TeamOptions.squad.title)
-                                ? AppNavigator.navigateToPage(
-                                    routeName: AppRoutes.squadInfo,
-                                    context: context,
-                                    )
-                                : AppNavigator.navigateToPage(
-                                    routeName: AppRoutes.teamInfo,
-                                    context: context,
-                                  );
+                                ? context.pushNamed("squadInfo")
+                                : context.pushNamed("teamInfo");
                           }),
                           child: ListTile(
                             leading: e.icon,
@@ -110,4 +106,3 @@ class Item {
   TeamInfo headerValue;
   bool isExpanded;
 }
-

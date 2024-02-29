@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:statszone/presentation/app_presentation.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -5,8 +6,12 @@ class FavouritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Favorites"),
+    return Center(
+      child: GestureDetector(
+          onTap: () {
+            context.goNamed("favouritesInfo");
+          },
+          child: Text("Favorites")),
     );
   }
 }

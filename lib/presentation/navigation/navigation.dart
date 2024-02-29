@@ -1,36 +1,48 @@
+import 'package:go_router/go_router.dart';
 import 'package:statszone/presentation/app_presentation.dart';
 import 'package:flutter/cupertino.dart';
 
 class NavigationWidget extends StatefulWidget {
   const NavigationWidget({
     Key? key,
+    required this.navigationShell,
   }) : super(key: key);
+
+  /// The navigation shell and container for the branch Navigators.
+  final StatefulNavigationShell navigationShell;
 
   @override
   State<NavigationWidget> createState() => _NavigationWidgetState();
 }
 
 class _NavigationWidgetState extends State<NavigationWidget> {
-  int _selectedTab = 0;
+  // int _selectedTab = 0;
 
-  void onSelected(int index) {
-    setState(() {
-      _selectedTab = index;
-    });
+  // void onSelected(int index) {
+  //   setState(() {
+  //     _selectedTab = index;
+  //   });
+  // }
+
+  void _goToBranch(int index) {
+    widget.navigationShell.goBranch(
+      index,
+      initialLocation: index == widget.navigationShell.currentIndex,
+      );
   }
 
   @override
-  void initState() {
-    super.initState();
-    _selectedTab = 0;
-  }
+  // void initState() {
+  //   super.initState();
+  //   _selectedTab = 0;
+  // }
 
-  static const List<Widget> bottomNavigationScreens = [
-    TeamsScreen(),
-    PlayersScreen(),
-    StatsScreen(),
-    FavouritesScreen(),
-  ];
+  // static const List<Widget> bottomNavigationScreens = [
+  //   TeamsScreen(),
+  //   PlayersScreen(),
+  //   StatsScreen(),
+  //   FavouritesScreen(),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -66,22 +78,19 @@ class _NavigationWidgetState extends State<NavigationWidget> {
             )
           ],
         ),
-        body: IndexedStack(
-          index: _selectedTab,
-          children: bottomNavigationScreens,
-        ),
+        body: widget.navigationShell,
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Theme.of(context).colorScheme.primary,
             iconSize: 20,
             elevation: 0,
-            currentIndex: _selectedTab,
-            onTap: onSelected,
+            currentIndex: widget.navigationShell.currentIndex,
+            onTap: _goToBranch,
             items: List.generate(
               bottomBarItems.length,
               (index) => BottomNavigationBarItem(
                 icon: Icon(
-                  _selectedTab == index
+                  widget.navigationShell.currentIndex == index
                       ? bottomBarItems[index].selectedIcon
                       : bottomBarItems[index].unselectedIcon,
                 ),

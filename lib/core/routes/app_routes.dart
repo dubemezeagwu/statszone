@@ -1,9 +1,10 @@
 class AppRoutes {
-  static const home = "/Home";
-  static const settings = "/Settings";
-  static const playerDetails = "/PlayerDetails";
-  static const statsDetails = "/StatsDetails";
-  static const squadInfo = "/SquadInfo";
-  static const teamInfo = "/TeamInfo";
-  static const navigation = "/Navigation";
+  static const teams = "/teams";
+  static const players = "/players";
+  static const stats = "/stats";
+  static const favourites = "/favourites";
+  static const playerDetails = "/playerDetails";
+  static const statsDetails = "/statsDetails";
+  static const squadInfo = "/squadInfo";
+  static const teamInfo = "/teamInfo";
 }

@@ -65,25 +65,48 @@ class SquadInfoScreen extends ConsumerWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      darkDivider,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           "${position}s",
-                          style: context.textTheme.titleLarge
+                          style: context.textTheme.headlineSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
+                      darkDivider,
                       ListView.builder(
                         itemCount: players?.length,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: ((context, playerIndex) {
                           final player = players?[playerIndex];
-                          return PlayerSquadWidget(
-                            name: player?.name ?? "",
-                            playerImage: player?.photo ?? "",
-                            playerNumber: player?.number.toString() ?? "00",
-                            position: player?.position ?? "Footballer",
+                          return GestureDetector(
+                            onTap: (() {
+                              print("Selected 1: ${player?.id}");
+                              final newPlayer = ref
+                                  .read(getPlayerByIdProvider(
+                                      284.toString())).value
+                                  ?.first;
+                              // ref.watch(
+                              //     getPlayerByIdProvider(player!.id.toString())).asData?.value;
+                              print("Selected 2: $newPlayer");
+                              // ref
+                              //     .read(selectedPlayerProvider.notifier)
+                              //     .state = newPlayer;
+                              // AppNavigator.navigateToPage(
+                              //     routeName: AppRoutes.playerDetails,
+                              //     context: context);
+                            }),
+                            child: PlayerSquadWidget(
+                              name: player?.name ?? "",
+                              playerImage: player?.photo ?? "",
+                              playerNumber:
+                                  (player?.number.toString() == "null")
+                                      ? "00"
+                                      : player?.number.toString(),
+                              position: player?.position ?? "Footballer",
+                            ),
                           );
                         }),
                       ),

@@ -1,5 +1,8 @@
+import 'package:go_router/go_router.dart';
+import 'package:statszone/domain/models/player_info.dart';
 import 'package:statszone/domain/view_models/stats_view_model.dart';
 import 'package:statszone/presentation/app_presentation.dart';
+import 'package:statszone/presentation/widgets/customized_loader.dart';
 
 class StatsScreen extends ConsumerWidget {
   const StatsScreen({Key? key}) : super(key: key);
@@ -10,6 +13,42 @@ class StatsScreen extends ConsumerWidget {
     final topAssists = ref.watch(topAssistsFutureProvider).value;
     final topYellowCards = ref.watch(topYellowCardsFutureProvider).value;
     final topRedCards = ref.watch(topRedCardsFutureProvider).value;
+
+    final groupedData = [
+      StatsData(
+          AggregateType.goals.title, 
+          topGoals![0], 
+          AggregateType.goals,
+          topGoals[0].playerStats!.goal!.total.toString()),
+      StatsData(
+          AggregateType.assists.title,
+          topAssists![0],
+          AggregateType.assists,
+          topAssists[0].playerStats!.goal!.assists.toString()),
+      StatsData(
+          AggregateType.yellowCards.title,
+          topYellowCards![0],
+          AggregateType.yellowCards,
+          topYellowCards[0].playerStats!.card!.yellow.toString()),
+      StatsData(
+          AggregateType.redCards.title,
+          topRedCards![0],
+          AggregateType.redCards,
+          topRedCards[0].playerStats!.card!.red.toString()),
+    ];
+
+    final resultProvider = FutureProvider<List<PlayerInfo>>(((ref) async {
+      final topGoalsFuture = await ref.watch(topGoalsFutureProvider.future);
+      final topAssistsFuture = await ref.watch(topAssistsFutureProvider.future);
+      final topYellowCardsFuture =
+          await ref.watch(topYellowCardsFutureProvider.future);
+      final topRedCardsFuture =
+          await ref.watch(topRedCardsFutureProvider.future);
+      return topGoalsFuture! +
+          topAssistsFuture! +
+          topYellowCardsFuture! +
+          topRedCardsFuture!;
+    }));
     return SafeArea(
         child: SizedBox(
       height: MediaQuery.of(context).size.height,
@@ -24,78 +63,51 @@ class StatsScreen extends ConsumerWidget {
                     style: context.textTheme.headlineLarge
                         ?.copyWith(fontWeight: FontWeight.bold),
                   )),
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.6,
-                  crossAxisSpacing: 20,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        AppNavigator.navigateToPage(
-                            routeName: AppRoutes.statsDetails,
-                            context: context,
-                            arguments: AggregateType.goals);
-                      },
-                      child: StatsPreviewWidget(
-                          image: topGoals![0].player?.image ?? "",
-                          statsTitle: "Goals",
-                          statsNumber:
-                              topGoals[0].playerStats?.goal?.total.toString()),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        AppNavigator.navigateToPage(
-                            routeName: AppRoutes.statsDetails,
-                            context: context,
-                            arguments: AggregateType.assists);
-                      },
-                      child: StatsPreviewWidget(
-                          image: topAssists![0].player?.image ?? "",
-                          statsTitle: "Assists",
-                          statsNumber: topAssists[0]
-                              .playerStats
-                              ?.goal
-                              ?.assists
-                              .toString()),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        AppNavigator.navigateToPage(
-                            routeName: AppRoutes.statsDetails,
-                            context: context,
-                            arguments: AggregateType.yellowCards);
-                      },
-                      child: StatsPreviewWidget(
-                          image: topYellowCards![0].player?.image ?? "",
-                          statsTitle: "Yellow Cards",
-                          statsNumber: topYellowCards[0]
-                              .playerStats
-                              ?.card
-                              ?.yellow
-                              ?.toString()),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        AppNavigator.navigateToPage(
-                            routeName: AppRoutes.statsDetails,
-                            context: context,
-                            arguments: AggregateType.redCards);
-                      },
-                      child: StatsPreviewWidget(
-                          image: topRedCards![0].player?.image ?? "",
-                          statsTitle: "Red Cards",
-                          statsNumber: topRedCards[0]
-                              .playerStats
-                              ?.card
-                              ?.red
-                              ?.toString()),
-                    ),
-                  ],
-                ),
-              ),
+              FutureBuilder<List<PlayerInfo>>(
+                  future: ref.watch(resultProvider.future),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CustomizedLoader();
+                    } else {
+                      return Expanded(
+                        child: GridView.builder(
+                          itemCount: snapshot.data?.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.goNamed("statsDetails",
+                                    pathParameters: {
+                                      "type": AggregateType.goals.title
+                                    });
+                              },
+                              child: StatsPreviewWidget(
+                                  image: groupedData[index]
+                                          .playerInfo
+                                          .player
+                                          ?.image ??
+                                      "",
+                                  statsTitle: groupedData[index].title,
+                                  statsNumber: groupedData[index].value),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  }),
             ],
           )),
     ));
   }
+}
+
+class StatsData {
+  final String title;
+  final AggregateType type;
+  final PlayerInfo playerInfo;
+  final String value;
+
+  StatsData(this.title, this.playerInfo, this.type, this.value);
 }

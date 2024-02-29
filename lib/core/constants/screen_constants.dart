@@ -33,6 +33,11 @@ const Widget divider = Divider(
   thickness: 2,
 );
 
+const Widget darkDivider = Divider(
+  thickness: 2,
+  color: kBlack,
+);
+
 const Widget yellowCard = SizedBox(
   height: 40,
   width: 30,

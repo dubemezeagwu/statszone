@@ -11,7 +11,7 @@ class PlayerDetailedScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final player = ref.read(selectedPlayerProvider);
+    final player = ref.watch(selectedPlayerProvider);
     return Scaffold(
       body: CustomScrollView(
         slivers: [

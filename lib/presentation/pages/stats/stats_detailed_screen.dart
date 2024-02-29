@@ -5,7 +5,8 @@ import 'package:statszone/presentation/app_presentation.dart';
 import 'package:statszone/presentation/widgets/league_stats_widget.dart';
 
 class StatsDetailedScreen extends ConsumerWidget {
-  const StatsDetailedScreen(this.type, {super.key});
+  const StatsDetailedScreen(this.type, {Key? key}) : super(key: key);
+  
   final AggregateType type;
 
   @override
@@ -136,6 +137,7 @@ class ReusableStatsWidget extends StatelessWidget {
     }
   }
   }
+
 
 class DataRowWidget extends DataRow {
   DataRowWidget(

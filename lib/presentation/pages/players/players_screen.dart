@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:statszone/domain/view_models/player_view_model.dart';
 import 'package:statszone/presentation/app_presentation.dart';
 import 'package:statszone/presentation/widgets/customized_loader.dart';
@@ -68,9 +69,7 @@ class _PlayersScreenState extends ConsumerState<PlayersScreen> {
                         onTap: () {
                           ref.read(selectedPlayerProvider.notifier).state =
                               player;
-                          AppNavigator.navigateToPage(
-                              routeName: AppRoutes.playerDetails,
-                              context: context);
+                          context.pushNamed("playerDetails");
                         },
                         child: PlayerSearchWidget(
                           playerImage: player.player?.image,

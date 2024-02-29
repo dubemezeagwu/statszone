@@ -27,6 +27,10 @@ enum AggregateType {
   const AggregateType(
     this.title,
   );
+
+  factory AggregateType.fromTitle(String title) {
+    return values.firstWhere((e) => e.title == title);
+  }
 }
 
 enum TeamOptions {
